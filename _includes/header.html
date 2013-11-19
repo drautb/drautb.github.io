@@ -10,15 +10,17 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-        $('code').wrap("<div class=\"code-wrapper\"></div>");
+        $('.highlight').wrap("<div class=\"code-wrapper\"></div>");
+        $('.highlight').css('background-color', 'inherit');
     })
     </script>
 </head>
 
 <body>
     <div id="wrapper">
-        <header>
-            <p><h1>Tumbleweed between the temples</h1></p>
-            <p><h4>Where mental tumbleweeds roam free</h4></p>
-        </header>
+        <div id="content-wrapper">
+            <header>
+                <p><h1><a href="/">Tumbleweed between the temples</a></h1></p>
+                <p><h4>Where mental tumbleweeds roam free</h4></p>
+            </header>
         

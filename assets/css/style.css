@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: #333;
+    background-color: #222;
     border-top: 5px solid #fc0;
     /*font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
     font-family: 'Raleway', sans-serif;
@@ -18,8 +18,11 @@ header {
     padding-top: 30px;
 }
 
+header a {
+    color: #ddd !important;
+}
+
 footer {
-    background-color: #222;
     clear:both;
     color: gray;
     float: left;
@@ -51,7 +54,7 @@ code {
 
 .code-wrapper {
     background: #333;
-    border-radius: 5px;
+    border-radius: 10px;
     box-shadow: inset 0 1px 10px rgba(0,0,0,.3), 0 1px 0 rgba(255,255,255,.1), 0 -1px 0 rgba(0,0,0,.5);
     overflow: auto;
     padding: 15px 0;
@@ -84,6 +87,11 @@ p {
 }
 
 #wrapper {
+    background-color: #333;
+    width: 100%;
+}
+
+#content-wrapper {
     color: #ddd;
     font-size: 14pt;
     line-height: 1.25em;
@@ -93,13 +101,13 @@ p {
     width: 960px;
 }
 
-#wrapper a {
+#content-wrapper a {
     color: #fc0;
     text-decoration: none;
     text-shadow: 0 1px 3px rgba(0,0,0,.5);
 }
 
-#wrapper a:hover {
+#content-wrapper a:hover {
     color: #f90;
 }
 
@@ -142,3 +150,9 @@ p {
     height: 30px;
     margin-top: 8px;
 }
+
+.clear {
+    clear: both;
+    min-height: 40px;
+}
+
