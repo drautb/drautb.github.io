@@ -1,0 +1,5 @@
+baseurl:     /
+destination: ./_site
+plugins:     ./_plugins
+future:      true
+permalink:   date

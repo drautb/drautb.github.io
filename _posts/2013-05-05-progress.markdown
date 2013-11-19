@@ -1,0 +1,21 @@
+---
+layout: post
+title: Progress!
+---
+
+This week I finally successfully launched the original Greebles running on an
+old eMac that I found! Now I’ll be able to compare to the original as I develop
+the modernized version.
+
+![](https://lh3.googleusercontent.com/-v2wsQozGf3M/UYbJ0DViyeI/AAAAAAAABCI/nyB2RjPjWoY/w902-h677/IMG_20130505_145929.jpg)
+
+![](https://lh5.googleusercontent.com/-WMQLM1rowfE/UYbJ4NvmvRI/AAAAAAAABCU/rsZWHgxQAJk/w902-h677/IMG_20130505_150026.jpg)
+
+![](https://lh4.googleusercontent.com/-sySgLrkgn_s/UYbJ-ktt7aI/AAAAAAAABCs/wUe1Q6agnUY/w902-h677/IMG_20130505_150359.jpg)
+
+Turns out that good documentation is kind of hard to find when it comes to
+getting classic mode running on OS X 10.4, after lots of searching I finally
+found this page that lays it out extremely well. Hopefully it’s of use to
+someone else at some point. :)
+
+Next it’s back to framework development for the game. Stay tuned. :)

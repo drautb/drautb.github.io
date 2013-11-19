@@ -1,1 +1,8 @@
+# Ruby Gemfile
+*.lock
+
+# Jekyll Files
+_site/
+
+# Sublime Text Files
 *.sublime-*

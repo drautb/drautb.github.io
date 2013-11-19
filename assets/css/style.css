@@ -1,0 +1,145 @@
+@charset"UTF-8";
+
+/* CSS Document */
+ article, section, aside, hgroup, nav, header, footer, figure, figcaption {
+    display: block;
+}
+
+body {
+    background-color: #333;
+    border-top: 5px solid #fc0;
+    /*font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
+    font-family: 'Raleway', sans-serif;
+}
+
+header {
+    height: 130px;
+    margin-top: 5px;
+    padding-top: 30px;
+}
+
+footer {
+    background-color: #222;
+    clear:both;
+    color: gray;
+    float: left;
+    font-size: 10pt;
+    min-height: 160px;
+    margin-top: 60px;
+    width: 100%;
+}
+
+footer a {
+    color: #ddd;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #f90;
+}
+
+code {
+    white-space: pre;
+    display: inline-block;
+    margin: 0;
+    /*padding: 0;*/
+    font-family: Menlo, Consolas, "Courier New", Courier, "Liberation Mono", monospace;
+    font-size: 14px;
+    padding: 0 .5em;
+    line-height: 1.8em;
+
+    padding: 10px 0;
+    width: 100%;
+    overflow: auto;
+    
+    background: #333;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 10px rgba(0,0,0,.3), 0 1px 0 rgba(255,255,255,.1), 0 -1px 0 rgba(0,0,0,.5);
+
+}
+
+
+#inner-footer {
+    width: 960px;
+    margin: 0px auto;
+}
+
+h1 {
+    font-size: 28pt;
+    margin-bottom: 20px
+}
+
+h2 {
+    font-size: 24pt;
+    margin-bottom: 15px;
+}
+
+h3 {
+    font-size: 18pt;
+    margin-bottom: 10px;
+}
+
+p {
+    margin: 18px 0px;
+}
+
+#wrapper {
+    color: #ddd;
+    font-size: 14pt;
+    line-height: 1.25em;
+    font-weight: lighter;
+    margin-left:auto;
+    margin-right:auto;
+    width: 960px;
+}
+
+#wrapper a {
+    color: #fc0;
+    text-decoration: none;
+    text-shadow: 0 1px 3px rgba(0,0,0,.5);
+}
+
+#wrapper a:hover {
+    color: #f90;
+}
+
+#content {
+    background-color: #444;
+    border-radius: 25px;
+    float: left;
+    min-height: 300px;
+    padding: 20px;
+    width:720px;
+}
+
+#rightcol {
+    float: left;
+    font-size: 12pt;
+    text-align: right;
+    width: 200px;
+}
+
+#rightcol h4 {
+    border-bottom: 1px solid red;
+    margin-top: 30px;
+    text-transform: uppercase;
+}
+
+#credit {
+    float: left;
+}
+
+#github-credit {
+    float: right;
+}
+
+#github-credit #hosted-msg {
+    margin-top: -10px;
+}
+
+#github-credit img {
+    width: 100px;
+    height: 30px;
+    margin-top: 8px;
+}

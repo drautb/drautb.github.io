@@ -1,0 +1,11 @@
+<div class="blog-post">
+    <h3 class="post-title">
+        {% if post.url %}
+        <a href="{{ root_url }}{{ post.url }}">{{ post.title }}</a>
+        {% else %}
+        {{ page.title }}
+        {% endif %}
+    </h3>
+    <div class="post-content">{{ content }}</div>
+</div>
+    

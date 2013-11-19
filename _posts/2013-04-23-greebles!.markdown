@@ -1,0 +1,46 @@
+---
+layout: post
+title: Greebles!
+---
+
+Once upon time, in the far away land of Burkholder, there was a young classroom
+of curious computer literacy students. They were subjected to grueling
+blindfolded typing tests and mind-numbing lectures each morning, but twas not
+all awful. On occasion these friends found time to amuse themselves by engaging
+in virtual contests of dexterity and skill, which cast rays of joy into their
+youthful souls. The most popular and exciting of all these contests was
+Greebles. Seemingly without limits with regard to the number of contestants or
+length of play, Greebles was adored by all.
+
+Sadly, their joy could not last.
+
+For Greebles had been made for the PowerPC architecture of Mac OS 9, built by
+the mighty kingdom of Apple. Soon thereafter however, Apple abandoned OS 9 and
+the old architecture. The serfs of Stairways software, the publishers of
+Greebles, would also abandon their product, leaving thousands of loyal
+followers without means to preserve the joys of their youth.
+
+Many years passed, and people began to forget about Greebles. One of the youths
+from Burkholder however, began to remember. He was an apprentice in the ways of
+software development, and desired to undertake a quest to use his skills to
+resurrect Greebles. He sent word to Peter Lewis, the leader of Stairways
+software, explaining his intentions. Many days passed before word came back,
+but when it arrived, the youth was overjoyed to read that Peter gave his
+blessing to the quest, and included with his message ‘sprites’, ‘level
+definition files’, and ‘sound effects’ to help the youth.
+
+The young man embarked, anxious to complete the quest and restore joy to his
+friends of ages past. Sadly, he underestimated the skill, strength, and time
+that the quest would exact of him. Twice he began, and twice he failed. For a
+time, he gave up, painfully aware that he lacked what was necessary to achieve
+his desire. He continued his apprenticeship, and began university studies,
+absorbing and learning all he could of the ways of the master developers.
+However, always, in the back of his mind, was Greebles.
+
+Now, nearly half a decade later, he is ready to try again.
+
+[Original Stairways Website](http://www.stairways.com/action/linkthru?greebles)
+
+[Fan Site](http://www.infam.ch/greebles)
+
+[Gameplay Video](http://www.youtube.com/watch?v=tMnthmrB-eo)
