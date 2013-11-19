@@ -47,16 +47,15 @@ code {
     font-size: 14px;
     padding: 0 .5em;
     line-height: 1.8em;
+}
 
-    padding: 10px 0;
-    width: 100%;
-    overflow: auto;
-    
+.code-wrapper {
     background: #333;
-    color: #fff;
     border-radius: 5px;
     box-shadow: inset 0 1px 10px rgba(0,0,0,.3), 0 1px 0 rgba(255,255,255,.1), 0 -1px 0 rgba(0,0,0,.5);
-
+    overflow: auto;
+    padding: 15px 0;
+    width: 100%;
 }
 
 

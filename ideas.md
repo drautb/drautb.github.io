@@ -27,3 +27,4 @@ TODO:
 * Bulleted lists
 * archive
 * fuzzy search blog archive
+* Image blocks, with lightbox?

@@ -13,14 +13,22 @@ easy! Here’s all it takes to tell CMake to generate an OS X App for the Setup
 Dialog:
 
 
-```
+``` cmake
 set(MACOSX_BUNDLE_NAME setup) 
 add_executable(setup MACOSX_BUNDLE ${SETUP_SRCS})
 target_link_libraries(setup ${SETUP_LIBS})
 set_target_properties(setup PROPERTIES MACOSX_BUNDLE TRUE)
 REST OF CMAKE
 ```
- 
+
+Higlighting Test: 
+
+``` ruby
+require 'redcarpet'
+markdown = Redcarpet.new("Hello World!")
+puts markdown.to_html
+```
+
 And with that CMake will compile your executable, and place it in an OS X App
 that you may then launch as you would any other.
 
