@@ -1,6 +1,9 @@
 ---
 layout: post
 title: Status Update
+tags:
+- gamedev
+- greebles
 ---
 
 Remember a while back when I said there were only three parts of the project?

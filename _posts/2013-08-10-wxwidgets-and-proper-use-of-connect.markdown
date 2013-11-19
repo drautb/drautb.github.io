@@ -1,6 +1,10 @@
 ---
 layout: post
 title: wxWidgets and proper user of Connect()
+tags:
+- wxwidgets
+- gamedev
+- greebles
 ---
 
 I recently fixed a painfully subtle bug, and decided to share my experience for

@@ -1,6 +1,9 @@
 ---
 layout: post
 title: Snowman Apocalypse!
+tags:
+- gamedev
+- calvin and hobbes
 ---
 
 This semester I took a computer graphics course. For our final project, we had

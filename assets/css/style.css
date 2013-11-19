@@ -22,6 +22,19 @@ header a {
     color: #ddd !important;
 }
 
+.blog-post img {
+    background: #aaa;
+    border-radius: 10px;
+    box-shadow: inset 0 1px 10px rgba(0,0,0,.3), 0 1px 0 rgba(255,255,255,.1), 0 -1px 0 rgba(0,0,0,.5);
+    display: block;
+    height: auto;
+    margin: 0px auto;
+    max-height: 160px;
+    max-width: 260px;
+    overflow: auto;
+    padding: 15px;
+}
+
 footer {
     clear:both;
     color: gray;
@@ -86,6 +99,16 @@ p {
     margin: 18px 0px;
 }
 
+ul li { 
+    padding: 0; 
+    margin: 0; 
+}
+
+ul a { 
+    padding: 2px; 
+    display: block; 
+}
+
 #wrapper {
     background-color: #333;
     width: 100%;
@@ -120,6 +143,12 @@ p {
     width:720px;
 }
 
+.blog-post .post-meta {
+    width: 100%;
+    text-align: center;
+    font-size: 10pt;
+}
+
 #rightcol {
     float: left;
     font-size: 12pt;
@@ -149,6 +178,10 @@ p {
     width: 100px;
     height: 30px;
     margin-top: 8px;
+}
+
+.right {
+    float: right;
 }
 
 .clear {

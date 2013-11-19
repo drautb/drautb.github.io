@@ -1,7 +1,13 @@
 ---
 layout: default
+title: Tumbleweed between the temples
 ---
- 
-{% assign post = site.posts.first %}
-{% assign content = post.content %}
-{% include post_detail.html %}
+
+{% for post in site.posts limit: 3 %}
+    {% assign content = post.content %}
+    {% include post_detail.html %}
+    <br/>
+{% endfor %}
+<div class="right">
+    <a href="archive.html">Older Posts</a>
+</div>

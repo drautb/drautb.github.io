@@ -1,6 +1,10 @@
 ---
 layout: post
 title: Progress!
+tags:
+- greebles
+- emac throwback
+- os9
 ---
 
 This week I finally successfully launched the original Greebles running on an

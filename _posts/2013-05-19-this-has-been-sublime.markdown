@@ -1,6 +1,10 @@
 ---
 layout: post
 title: This has been...Sublime
+tags:
+- sublime text
+- gamedev
+- cmake
 ---
 
 After a chance discussion with a friend of mine, and a positive test-run on my

@@ -1,6 +1,9 @@
 ---
 layout: post
 title: Greebles!
+tags:
+- prose
+- greebles
 ---
 
 Once upon time, in the far away land of Burkholder, there was a young classroom

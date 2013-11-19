@@ -1,6 +1,12 @@
 ---
 layout: post
 title: Sometimes, Magic
+tags:
+- gamedev
+- gflw
+- gcc
+- c++11
+- bugs
 ---
 
 I decided a while back that I was going to use GLFW for Greebles. It’s

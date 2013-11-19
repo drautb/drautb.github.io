@@ -1,6 +1,10 @@
 ---
 layout: post
 title: Keep Moving Forward
+tags:
+- greebles
+- gamedev
+- wxwidgets
 ---
 
 I’ve been working diligently on Greebles for most of the weekend, I’m happy

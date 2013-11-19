@@ -1,6 +1,11 @@
 ---
 layout: post
 title: First Cross-Platform Experience!
+tags:
+- cross platform
+- gamedev
+- greebles
+- cmake
 ---
 
 This week, for the first time, I attempted to build the Greebles project on Mac
