@@ -18,15 +18,7 @@ set(MACOSX_BUNDLE_NAME setup)
 add_executable(setup MACOSX_BUNDLE ${SETUP_SRCS})
 target_link_libraries(setup ${SETUP_LIBS})
 set_target_properties(setup PROPERTIES MACOSX_BUNDLE TRUE)
-REST OF CMAKE
-```
-
-Higlighting Test: 
-
-``` ruby
-require 'redcarpet'
-markdown = Redcarpet.new("Hello World!")
-puts markdown.to_html
+# REST OF CMAKE
 ```
 
 And with that CMake will compile your executable, and place it in an OS X App

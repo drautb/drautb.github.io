@@ -1,6 +1,7 @@
 baseurl:     /
 destination: ./_site
 plugins:     ./_plugins
+pygments:    true
 future:      true
 permalink:   date
 markdown:    redcarpet
