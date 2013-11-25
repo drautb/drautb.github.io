@@ -15,6 +15,10 @@ Website/Blog Content Brainstorm
 ## Articles to Read:
 
 http://speeches.byu.edu/?act=viewitem&id=1943
+
+http://kiro.me/projects/fuse.html
+
+
 SICP
 Java Schools
 Beating the Averages
@@ -27,4 +31,3 @@ TODO:
 * Bulleted lists
 * archive
 * fuzzy search blog archive
-* Image blocks, with lightbox?

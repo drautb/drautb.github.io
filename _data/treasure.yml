@@ -1,0 +1,15 @@
+# This YAML file contains all the "Treasure" page links that I've gathered
+# The page is generated dynamically from this data. In addtion, I can 
+# use Jekyll's jsonify filter on it to get it ready for a fuzzy search
+
+- name: What if love were our only motive?
+  link: http://speeches.byu.edu/?act=viewitem&id=1943
+
+- name: Beating the Averages
+  link: http://www.paulgraham.com/avg.html
+  
+- name: The Perils of JavaSchools
+  link: http://www.joelonsoftware.com/articles/ThePerilsofJavaSchools.html
+
+- name: Go Concurrency Patterns
+  link: http://www.youtube.com/watch?v=f6kdp27TYZs

@@ -143,9 +143,12 @@ ul a {
     width:720px;
 }
 
-.blog-post .post-meta {
+.post-footer {
+    text-align: center
+}
+
+.post-meta {
     width: 100%;
-    text-align: center;
     font-size: 10pt;
 }
 

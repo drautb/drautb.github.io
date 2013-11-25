@@ -1,0 +1,13 @@
+---
+layout: default
+title: Treasure Box
+---
+
+<h3>Treasure Box</h3>
+<p>This is my stash of articles, videos, and other web media that I want to remember. They're all listed below, but you can also use the search bar.</p>
+
+{% for gold in site.data.treasure %}
+<p>
+    <a href="{{ gold.link }}">{{ gold.name }}</a>
+</p>
+{% endfor %}

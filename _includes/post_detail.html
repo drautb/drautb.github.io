@@ -7,19 +7,21 @@
         {% endif %}
     </h3>
     <div class="post-content">{{ content }}</div>
-    <p class="post-meta">
-        {% if post.date %}
-            <span>Posted on {{ post.date | date: "%B %-d, %Y" }}</span>
-        {% else %}
-            <span>Posted on {{ page.date | date: "%B %-d, %Y" }}</span>
-        {% endif %}
-        <br/>
-        <a href="/archive.html">Tags:</a>
-        {% if post.tags %}
-            {{ post.tags | array_to_sentence_string }}
-        {% else %}
-            {{ page.tags | array_to_sentence_string }}
-        {% endif %}
-    </p>
+    <div class="post-footer">
+        <p class="post-meta">
+            {% if post.date %}
+                <span>Posted on {{ post.date | date: "%B %-d, %Y" }}</span>
+            {% else %}
+                <span>Posted on {{ page.date | date: "%B %-d, %Y" }}</span>
+            {% endif %}
+            <br/>
+            <a href="/archive.html">Tags:</a>
+            {% if post.tags %}
+                {{ post.tags | array_to_sentence_string }}
+            {% else %}
+                {{ page.tags | array_to_sentence_string }}
+            {% endif %}
+        </p>
+    </div>
 </div>
     
