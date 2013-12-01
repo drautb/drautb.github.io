@@ -34,14 +34,14 @@ contains. Here are some pictures to illustrate:
 
 Here's what the game world actually looks like: 
 
-![](/assets/img/bzrflag-world.bmp)
+![](/assets/img/bzrflag-world.png)
 
 You can see each of the four teams bases on each side. The red tanks on the
 left are going to explore the world in the demo. 
 
 When the tanks first start exploring, here's what their radar looks like:
 
-![](/assets/img/grid-filter-1.bmp)
+![](/assets/img/grid-filter-1.png)
 
 Their radar scans the world pixel-by-pixel, so the color of each pixel tells
 you what the tanks believe about that pixel. It's a whole spectrum from white
@@ -52,9 +52,9 @@ what is there, so that's why most of the world is gray at first.
 
 Here are a few more scans after some more time.
 
-![](/assets/img/grid-filter-2.bmp)
+![](/assets/img/grid-filter-2.png)
 
-![](/assets/img/grid-filter-3.bmp)
+![](/assets/img/grid-filter-3.png)
 
 By the time they've explored most of the world, you can see they have a pretty
 solid idea of where the obstacles are. Cool, right?
