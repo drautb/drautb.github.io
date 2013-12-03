@@ -13,3 +13,9 @@
 
 - name: Go Concurrency Patterns
   link: http://www.youtube.com/watch?v=f6kdp27TYZs
+
+- name: Software Foundations
+  link: http://www.cis.upenn.edu/~bcpierce/sf/
+
+- name: Certified Programming with Dependent Types
+  link: http://adam.chlipala.net/cpdt/
