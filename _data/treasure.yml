@@ -19,3 +19,12 @@
 
 - name: Certified Programming with Dependent Types
   link: http://adam.chlipala.net/cpdt/
+
+- name: Functional Programming in C++
+  link: http://www.altdevblogaday.com/2012/04/26/functional-programming-in-c/
+
+- name: Dynamic Languages are Static Languages
+  link: http://existentialtype.wordpress.com/2011/03/19/dynamic-languages-are-static-languages/
+
+- name: Planning is Essential in Writing Multiplayer Network Code
+  link: http://www.gameproducer.net/2006/12/16/planning-is-essential-in-writing-multiplayer-network-code/
