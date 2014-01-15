@@ -17,6 +17,8 @@ length of play, Greebles was adored by all.
 
 Sadly, their joy could not last.
 
+<!--more-->
+
 For Greebles had been made for the PowerPC architecture of Mac OS 9, built by
 the mighty kingdom of Apple. Soon thereafter however, Apple abandoned OS 9 and
 the old architecture. The serfs of Stairways software, the publishers of

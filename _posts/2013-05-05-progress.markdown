@@ -11,6 +11,8 @@ This week I finally successfully launched the original Greebles running on an
 old eMac that I found! Now I’ll be able to compare to the original as I develop
 the modernized version.
 
+<!--more-->
+
 ![](https://lh3.googleusercontent.com/-v2wsQozGf3M/UYbJ0DViyeI/AAAAAAAABCI/nyB2RjPjWoY/w902-h677/IMG_20130505_145929.jpg)
 
 ![](https://lh5.googleusercontent.com/-WMQLM1rowfE/UYbJ4NvmvRI/AAAAAAAABCU/rsZWHgxQAJk/w902-h677/IMG_20130505_150026.jpg)

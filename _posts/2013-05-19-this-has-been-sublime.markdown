@@ -13,6 +13,8 @@ work computer, I decided this week to reformat my hard drive and install Ubuntu
 with it so far: it’s much faster and less buggy than the last time I tried it,
 and I haven’t been able to come up with any need that it can’t meet. Hooray.
 
+<!--more-->
+
 Part of the reason I had been hesitant to leave Windows was Visual Studio. I
 like it. A lot. (Minus its slothfulness on my machine) I had never been able to
 find a comparable editor, IDE or build system for Linux that I was comfortable

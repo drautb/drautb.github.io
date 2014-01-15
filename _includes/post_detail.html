@@ -5,22 +5,21 @@
         {% else %}
             <span>{{ page.title }}</span>
         {% endif %}
+        <br/>
+        <span class="post-meta">Posted on {{ page.date | date: "%B %-d, %Y" }}</span>
     </h3>
     <div class="post-content">{{ content }}</div>
     <div class="post-footer">
         <p class="post-meta">
-            {% if post.date %}
-                <span>Posted on {{ post.date | date: "%B %-d, %Y" }}</span>
-            {% else %}
-                <span>Posted on {{ page.date | date: "%B %-d, %Y" }}</span>
-            {% endif %}
-            <br/>
-            {% if post.tags %}
+            {% if page.tags %}
                 <a href="/archive.html">Tags:</a>
-                {{ post.tags | array_to_sentence_string }}
+                {{ page.tags | array_to_sentence_string }}
             {% endif %}
         </p>
     </div>
+    <hr/>
+
+    <!-- DISQUS COMMENTS -->
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -35,5 +34,6 @@
     </script>
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
 </div>
     

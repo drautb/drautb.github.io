@@ -12,6 +12,8 @@ system, or anything else that we could convince the TA to give us credit for. I
 opted to fulfill a childhood dream and create a game inspired by Calvin and
 Hobbes. :)  You can download the game here.
 
+<!--more-->
+
 You play as our fearless hero, Calvin,   tasked with defending his snow fort
 from the “Attack of the Deranged Mutant Killer Monster Snow Goons!” You have
 only snowballs with which to fight. And a flamethrower. Of course Calvin gets

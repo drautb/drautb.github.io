@@ -17,6 +17,8 @@ written using GLFW 2.8 in Windows, to Linux, and update it to use GLFW 3.0. So
 that’s what I’ve been working on lately, and it’s just about done. Just minor
 fixes left. (Hopefully) As a sidenote, you can check it out on github.
 
+<!--more-->
+
 Here’s the exciting part. After updating the code to use GLFW 3.0, I got this
 weird bug. The camera wouldn’t follow Calvin around. I started printing out
 some debug data to see what was happening. The camera would correctly adjust

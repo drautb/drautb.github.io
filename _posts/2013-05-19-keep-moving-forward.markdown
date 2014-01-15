@@ -16,6 +16,8 @@ So, quick overview of the whole Greebles project. There are three separate
 Settings” program. The second two are just GUI forms for configuring the game
 settings. I’m going to finish two and three before one, and two before three.
 
+<!--more-->
+
 So I should have ordered them like this:
 
 * Setup Program

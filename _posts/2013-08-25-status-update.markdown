@@ -14,6 +14,8 @@ joining a network game, and displaying errors.
 I’ve spent the past couple of weekends working on those, but they’re pretty
 much done now! Here’s a screenshot of each of them:
 
+<!--more-->
+
 Setup: ![](/assets/img/setup.png)
 
 Custom Game Settings: ![](/assets/img/custom-game-settings.png)

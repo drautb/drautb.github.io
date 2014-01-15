@@ -17,6 +17,7 @@ program, must be bundled as an OS X App. Thankfully, CMake makes this really
 easy! Here’s all it takes to tell CMake to generate an OS X App for the Setup
 Dialog:
 
+<!--more-->
 
 ``` cmake
 set(MACOSX_BUNDLE_NAME setup) 

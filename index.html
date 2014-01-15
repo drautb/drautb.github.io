@@ -3,9 +3,9 @@ layout: default
 title: Tumbleweed between the temples
 ---
 
-{% for post in site.posts limit: 3 %}
+{% for post in site.posts limit: 5 %}
     {% assign content = post.content %}
-    {% include post_detail.html %}
+    {% include post_preview.html %}
     <br/>
 {% endfor %}
 <div class="right">

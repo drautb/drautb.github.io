@@ -12,6 +12,8 @@ artificial intelligence. All of our projects are centered around this game
 called bzrflag. It's a game of capture the flag with multiple teams of tanks
 that can drive around the world and shoot at each other. 
 
+<!--more-->
+
 For our first project, we created a system for helping our tanks navigate
 around the game world. Each tank had access to a list of all the obstacles in
 the world, so it was easy for it to just drive around them. In real life

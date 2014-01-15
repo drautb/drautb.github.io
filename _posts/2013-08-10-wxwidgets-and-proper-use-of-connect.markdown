@@ -13,6 +13,8 @@ for Greebles, I have several data members that stored the information
 represented on the GUI. Whenever a form component changes, it calls an event
 handler that updates the internal data member.
 
+<!--more-->
+
 When I started working on adding support to be able to do some drag and drop
 stuff, I added a new event handler; but when this event handler tries to access
 the relevant data members, suddenly everything was trashed! Pointers were
