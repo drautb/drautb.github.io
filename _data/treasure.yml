@@ -7,7 +7,7 @@
 
 - name: Beating the Averages
   link: http://www.paulgraham.com/avg.html
-  
+
 - name: The Perils of JavaSchools
   link: http://www.joelonsoftware.com/articles/ThePerilsofJavaSchools.html
 
@@ -40,3 +40,8 @@
 
 - name: Parallelization of Dynamic Languages
   link: https://air.mozilla.org/incremental-parallelization-of-dynamic-languages/
+
+- name: An Interactive Guide To The Fourier Transform
+  link: http://betterexplained.com/articles/an-interactive-guide-to-the-fourier-transform/
+
+  
