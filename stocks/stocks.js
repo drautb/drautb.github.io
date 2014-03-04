@@ -68,7 +68,7 @@ stocksApp.controller('teamCtrl', ['$scope', '$interval', '$http', function($scop
 	$scope.latestQuotes = [];
 
 	getLatestQuotes();
-	// $interval(getLatestQuotes, 30000);
+	$interval(getLatestQuotes, 10000);
 
 	function getLatestQuotes() {
 		var url = 'http://query.yahooapis.com/v1/public/yql';
