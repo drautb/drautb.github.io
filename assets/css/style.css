@@ -143,6 +143,15 @@ ul a {
     width:720px;
 }
 
+#content-full {
+    background-color: #444;
+    border-radius: 25px;
+    float: left;
+    min-height: 300px;
+    padding: 20px;
+    width: 920px;
+}
+
 .post-footer {
     text-align: center
 }

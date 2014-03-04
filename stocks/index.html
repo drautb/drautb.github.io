@@ -1,0 +1,90 @@
+---
+layout: no_sidebar
+title: La Bourse
+---
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+<script type="text/javascript" src="stocks.js"></script>
+
+<link rel="stylesheet" type="text/css" href="stocks.css">
+
+{% raw %}
+<div ng-app="stocks-app">
+	<h2>La Bourse</h2>
+	<br/>
+	<div ng-controller="teamCtrl">
+		<div ng-repeat="t in teams | orderBy:'-currentValue'">
+			<h3>{{ t.team }}</h3>
+			<span ng-style="font-size:14px;">{{ t.members[0] }} and {{ t.members[1] }}</span>
+			<table>
+				<tr>
+					<th>Symbole</th>
+					<th colspan="2">Dernier</th>
+					<th>Variation</th>
+					<th>Titres</th>
+					<th>Valeur</th>
+					<th colspan="2">Var. Jour</th>
+					<th>Prix Payé</th>
+					<th colspan="2">Gain et %</th>
+					<th>Nom</th>
+				</tr>
+				<tr ng-repeat="s in t.stocks">
+					<td>{{ s.symbol }}</td>
+					<td>{{ latestQuotes[s.symbol].lastTradeTime }}</td>
+					<td>{{ latestQuotes[s.symbol].currentBid | currency:"€" }}</td>
+					<td ng-class="(latestQuotes[s.symbol].change.indexOf('+') > -1) ? 'gain' : 'loss'">
+						{{ latestQuotes[s.symbol].change }}
+					</td>
+					<td>{{ s.shares }}</td>
+					<td>
+						{{ s.shares * latestQuotes[s.symbol].currentBid | currency:"€" }}
+					</td>
+					<td ng-class="(latestQuotes[s.symbol].change.indexOf('+') > -1) ? 'gain' : 'loss'">
+						{{ s.shares * latestQuotes[s.symbol].change | currency:"€" }}
+					</td>
+					<td ng-class="(latestQuotes[s.symbol].percentChange.indexOf('+') > -1) ? 'gain' : 'loss'">
+						{{ latestQuotes[s.symbol].percentChange }}
+					</td>
+					<td>{{ s.paid | currency:"€" }}</td>
+					<td ng-class="(s.paid <= latestQuotes[s.symbol].currentBid) ? 'gain' : 'loss'">
+						{{ s.shares * latestQuotes[s.symbol].currentBid - s.shares * s.paid | currency:"€" }}
+					</td>
+					<td ng-class="(s.percentChange >= 0) ? 'gain' : 'loss'">
+						<span ng-show="s.percentChange >= 0">+</span>
+						{{ s.percentChange * 100 | number:2 }}%
+					</td>
+					<td>{{ stockNames[s.symbol] }}</td>
+				</tr>
+				<tr class="total">
+					<td>Total:</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>
+						{{ t.currentValue | currency:"€" }}
+					</td>
+					<td ng-class="(t.currentValue - t.yesterdayValue >= 0) ? 'gain' : 'loss'">
+						{{ t.currentValue - t.yesterdayValue | currency:"€" }}
+					</td>
+					<td ng-class="(t.dayPercentChange >= 0) ? 'gain' : 'loss'">
+						<span ng-show="t.dayPercentChange >= 0">+</span>
+						<span ng-show="t.dayPercentChange < 0">-</span>
+						{{ t.dayPercentChange * 100 | number:2 }}%
+					</td>
+					<td></td>
+					<td ng-class="(t.totalGain >= 0) ? 'gain' : 'loss'">
+						{{ t.totalGain | currency:"€" }}
+					</td>
+					<td ng-class="(t.totalPercentChange >= 0) ? 'gain' : 'loss'">
+						<span ng-show="t.totalPercentChange >= 0">+</span>
+						{{ t.totalPercentChange * 100 | number:2 }}%
+					</td>
+					<td></td>
+				</tr>
+			</table>
+			<br/>
+		</div>
+	</div>
+</div>
+{% endraw %}

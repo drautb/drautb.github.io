@@ -1,0 +1,29 @@
+table {
+	background-color: white;
+	color: black;
+	font-family: 'Arial';
+	font-size: 12px;
+	width: 100%;
+}
+
+table tr:nth-child(2n) {
+    background-color: #f8f8f8;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    padding: 3px 7px;
+}
+
+.total {
+	font-weight: bold;
+	border-top: 2px solid black;
+}
+
+.gain {
+	color: darkgreen;
+}
+
+.loss {
+	color: red;
+}
