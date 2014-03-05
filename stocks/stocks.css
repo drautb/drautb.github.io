@@ -27,3 +27,12 @@ table, th, td {
 .loss {
 	color: red;
 }
+
+.right {
+}
+
+.trail {
+	font-family: 'Arial';
+	float:right;
+	font-size: 14px;
+}

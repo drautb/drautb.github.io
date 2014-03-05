@@ -4,6 +4,7 @@ title: La Bourse
 ---
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+<script type="text/javascript" src="dateFormat.js"></script>
 <script type="text/javascript" src="stocks.js"></script>
 
 <link rel="stylesheet" type="text/css" href="stocks.css">
@@ -15,6 +16,9 @@ title: La Bourse
 	<div ng-controller="teamCtrl">
 		<div ng-repeat="t in teams | orderBy:'-currentValue'">
 			<h3>{{ t.team }}</h3>
+			<span ng-if="t.trailing < 0" class="trail">
+					Trailing leader by <span class="loss">{{ t.trailing | currency:"€" }}</span>
+			</span>
 			<span style="font-size:14px;">{{ t.members[0] }} and {{ t.members[1] }}</span>
 			<table>
 				<tr>
@@ -69,7 +73,6 @@ title: La Bourse
 					</td>
 					<td ng-class="(t.dayPercentChange >= 0) ? 'gain' : 'loss'">
 						<span ng-show="t.dayPercentChange >= 0">+</span>
-						<span ng-show="t.dayPercentChange < 0">-</span>
 						{{ t.dayPercentChange * 100 | number:2 }}%
 					</td>
 					<td></td>
