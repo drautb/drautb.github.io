@@ -122,6 +122,7 @@ stocksApp.controller('teamCtrl', ['$scope', '$interval', '$http', function($scop
 			team.originalValue = 0;
 			team.yesterdayValue = 0;
 			team.dayPercentChange = 0;
+			team.trailing = 0;
 			for (var s=0; s<team.stocks.length; s++) {
 				var currentStockValue = team.stocks[s].shares * $scope.latestQuotes[team.stocks[s].symbol].currentBid;
 				var originalStockValue = team.stocks[s].shares * team.stocks[s].paid;
