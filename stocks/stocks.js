@@ -16,7 +16,7 @@ stocksApp.controller('teamCtrl', ['$scope', '$interval', '$http', function($scop
 		},
 		{
 			team: 'Les Mouchons de M. LeBras',
-			members: ['Steven Livingston', 'Ryan Horne'],
+			members: ['Brian Williams', 'Joshua Fryer'],
 			stocks: [
 				{ symbol: 'ALU.PA', shares: 469, paid: 3.187 },
 				{ symbol: 'DG.PA', shares: 25, paid: 53.95 },
@@ -28,7 +28,7 @@ stocksApp.controller('teamCtrl', ['$scope', '$interval', '$http', function($scop
 		},
 		{
 			team: 'Les sales types',
-			members: ['Brian Williams', 'Joshua Fryer'],
+			members: ['Steven Livingston', 'Ryan Horne'],
 			stocks: [
 				{ symbol: 'AC.PA', shares: 40, paid: 37.0 },
 				{ symbol: 'BN.PA', shares: 88, paid: 51.0 },
@@ -68,7 +68,7 @@ stocksApp.controller('teamCtrl', ['$scope', '$interval', '$http', function($scop
 	$scope.latestQuotes = [];
 
 	getLatestQuotes();
-	$interval(getLatestQuotes, 10000);
+	// $interval(getLatestQuotes, 10000);
 
 	function getLatestQuotes() {
 		var url = 'http://query.yahooapis.com/v1/public/yql';
