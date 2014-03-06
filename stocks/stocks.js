@@ -46,6 +46,7 @@ stocksApp.controller('teamCtrl', ['$scope', '$interval', '$http', function($scop
 		t.dayPercentChange = 0;
 		t.totalGain = 0;
 		t.totalPercentChange = 0;
+		t.trailing = 0;
 	});
 
 	$scope.stockNames = {
@@ -80,12 +81,14 @@ stocksApp.controller('teamCtrl', ['$scope', '$interval', '$http', function($scop
 
 		$http({method: 'GET', url: url}).success(function(data, status, headers, config) {
 			data.query.results.quote.forEach(function(res) {
+				var time = getFormattedTime(res.LastTradeTime);
+
 				$scope.latestQuotes[res.Symbol] = {
 					change: res.Change,
 					previousClose: res.PreviousClose,
 					percentChange: res.PercentChange,
 					currentBid: res.Ask,
-					lastTradeTime: res.LastTradeTime
+					lastTradeTime: time
 				};
 			});
 
@@ -94,6 +97,17 @@ stocksApp.controller('teamCtrl', ['$scope', '$interval', '$http', function($scop
 			console.log("Error retrieiving stock data");
 			console.log(status);
 		});
+	};
+
+	function getFormattedTime(time) {
+		time = time.replace(/(\d)([ap])/, "$1 $2");
+		var chunks = time.split(/:| /);
+		chunks[0] = Number(chunks[0]) + 6;
+
+		var today = new Date();
+		var traded = new Date(today.getFullYear(), today.getMonth(), today.getDay(), chunks[0], chunks[1], 0);
+
+		return traded.format("hh:MMtt") + " CET";
 	};
 
 	function getSymbols() {
@@ -108,6 +122,7 @@ stocksApp.controller('teamCtrl', ['$scope', '$interval', '$http', function($scop
 			team.originalValue = 0;
 			team.yesterdayValue = 0;
 			team.dayPercentChange = 0;
+			team.trailing = 0;
 			for (var s=0; s<team.stocks.length; s++) {
 				var currentStockValue = team.stocks[s].shares * $scope.latestQuotes[team.stocks[s].symbol].currentBid;
 				var originalStockValue = team.stocks[s].shares * team.stocks[s].paid;
@@ -122,6 +137,17 @@ stocksApp.controller('teamCtrl', ['$scope', '$interval', '$http', function($scop
 			team.totalGain = team.currentValue - team.originalValue;
 			team.totalPercentChange = (team.currentValue - team.originalValue) / team.originalValue;
 		});
+
+		for (var t=0; t<$scope.teams.length; t++) {
+			for (var op=0; op<$scope.teams.length; op++) {
+				if (op == t) continue;
+
+				$scope.teams[t].trailing = Math.min(
+					$scope.teams[t].trailing,
+					$scope.teams[t].currentValue - $scope.teams[op].currentValue
+  				);
+			}
+		}
 	};
 }]);
 	
