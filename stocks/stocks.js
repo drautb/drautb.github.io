@@ -15,7 +15,7 @@ stocksApp.controller('teamCtrl', ['$scope', '$interval', '$http', function($scop
 			]
 		},
 		{
-			team: 'Les Mouchons de M. LeBras',
+			team: 'Les Moutons de M. LeBras',
 			members: ['Brian Williams', 'Joshua Fryer'],
 			stocks: [
 				{ symbol: 'ALU.PA', shares: 469, paid: 3.187 },
