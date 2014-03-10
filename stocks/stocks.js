@@ -102,7 +102,7 @@ stocksApp.controller('teamCtrl', ['$scope', '$interval', '$http', function($scop
 	function getFormattedTime(time) {
 		time = time.replace(/(\d)([ap])/, "$1 $2");
 		var chunks = time.split(/:| /);
-		chunks[0] = Number(chunks[0]) + 6;
+		chunks[0] = Number(chunks[0]) + 5;
 
 		var today = new Date();
 		var traded = new Date(today.getFullYear(), today.getMonth(), today.getDay(), chunks[0], chunks[1], 0);
