@@ -15,8 +15,8 @@ stocksApp.controller('teamCtrl', ['$scope', '$interval', '$http', function($scop
 			]
 		},
 		{
-			team: 'Les Mouchons de M. LeBras',
-			members: ['Steven Livingston', 'Ryan Horne'],
+			team: 'Les Moutons de M. LeBras',
+			members: ['Brian Williams', 'Joshua Fryer'],
 			stocks: [
 				{ symbol: 'ALU.PA', shares: 469, paid: 3.187 },
 				{ symbol: 'DG.PA', shares: 25, paid: 53.95 },
@@ -28,7 +28,7 @@ stocksApp.controller('teamCtrl', ['$scope', '$interval', '$http', function($scop
 		},
 		{
 			team: 'Les sales types',
-			members: ['Brian Williams', 'Joshua Fryer'],
+			members: ['Steven Livingston', 'Ryan Horne'],
 			stocks: [
 				{ symbol: 'AC.PA', shares: 40, paid: 37.0 },
 				{ symbol: 'BN.PA', shares: 88, paid: 51.0 },
@@ -69,7 +69,7 @@ stocksApp.controller('teamCtrl', ['$scope', '$interval', '$http', function($scop
 	$scope.latestQuotes = [];
 
 	getLatestQuotes();
-	$interval(getLatestQuotes, 10000);
+	$interval(getLatestQuotes, 6000);
 
 	function getLatestQuotes() {
 		var url = 'http://query.yahooapis.com/v1/public/yql';
@@ -102,7 +102,7 @@ stocksApp.controller('teamCtrl', ['$scope', '$interval', '$http', function($scop
 	function getFormattedTime(time) {
 		time = time.replace(/(\d)([ap])/, "$1 $2");
 		var chunks = time.split(/:| /);
-		chunks[0] = Number(chunks[0]) + 6;
+		chunks[0] = Number(chunks[0]) + 5;
 
 		var today = new Date();
 		var traded = new Date(today.getFullYear(), today.getMonth(), today.getDay(), chunks[0], chunks[1], 0);
