@@ -1,10 +1,10 @@
-baseurl:     /
+name: Tech Tumbleweeds
+url: http://drautb.github.io
+paginate: 10
+baseurl: /
 destination: ./_site
-plugins:     ./_plugins
-pygments:    true
-future:      true
-permalink:   date
-markdown:    redcarpet
-redcarpet:
-  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript", "with_toc_data"]
+highlighter: pygments
+future: true
+permalink: /:year/:month/:day/:title/
+markdown: redcarpet
 excerpt_separator: <!--more-->

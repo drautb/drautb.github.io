@@ -20,11 +20,8 @@ var myObject = {
     
     myFunc: function () {
         var localV1 = this.data.v1;
-
         console.log(this.data.v1);
-
         localV1 = 43;
-
         console.log(this.data.v1);
     }
 };
@@ -53,11 +50,8 @@ var myObject = {
     
     myFunc: function () {
         var localData = this.data;
-
         console.log(this.data.v1);
-
         localData.v1 = 43;
-
         console.log(this.data.v1);
     }
 };
