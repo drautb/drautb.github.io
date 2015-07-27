@@ -75,6 +75,8 @@ print "Folder Ids: %s" % folder_ids
 picture_files = get_picture_file_list(device, folder_ids)
 for f in picture_files:
   print "Picture: %s - %s" % (f.filename, f.filesize)
+
+device.disconnect()
 ```
 
 And here's the output:
@@ -90,11 +92,41 @@ Android device detected, assigning default bug flags
 Connected to device: None
 DCIM folder id: 9
 Folder Ids: Set([9L, 34L, 203L, 970L])
-Picture: IMG_20150727_123625444.jpg - 2911526
-Picture: IMG_20150727_123616712.jpg - 3077009
+Picture: IMG_20150727_123625444.jpg - ID: 2395
+Picture: IMG_20150727_123616712.jpg - ID: 2396
 ```
 
 There are only a couple pictures on my phone right now, so there's not much in the output. I'm just thrilled that it didn't segfault! :)
+
+Now, what if I want to transfer one of those pictures from my phone to my computer? How would I do that?
+
+All I need are the file ids, which we got from the previous program:
+
+```python
+file_ids = [2395, 2396]
+
+for f in file_ids:
+  filename = "/tmp/file_" + str(f) + ".jpg"
+  device.get_file_to_file(f, filename, None)
+  print "Downloaded %s" % filename
+```
+
+Output:
+
+```
+Device 0 (VID=22b8 and PID=2e82) is a Motorola Moto G (ID2).
+libusb_get_active_config_descriptor(1) failed: No such file or directory
+no active configuration, trying to set configuration
+Android device detected, assigning default bug flags
+Downloaded /tmp/file_2395.jpg
+Downloaded /tmp/file_2396.jpg
+```
+
+Awesome! To delete the file when we're done, we just have to add a call to `delete_object`:
+
+```
+device.delete_object(f)
+```
 
 [1]: https://pypi.python.org/pypi/PyMTP
 [2]: http://ozgur.github.io/python-firebase/
