@@ -18,7 +18,7 @@ Ideally, I'd like something like this:
 
 * I plug my phone/video camera/USB stick in at some docking station.
 * My pictures and videos on the device are automatically moved to some central storage medium, indexed, and deleted from my device. (Duplicates are also deleted)
-* Anytime I want to see my pictures and videos, I just go to a website that isonly available on my home network, where I'm presented with a web UI that allows me to quickly browse thumbnails, view images and videos, or download them to whatever device I'm on.
+* Anytime I want to see my pictures and videos, I just go to a website that is only available on my home network, where I'm presented with a web UI that allows me to quickly browse thumbnails, view images and videos, or download them to whatever device I'm on.
 
 Sounds simple enough to me. Now, how do I build it?
 
