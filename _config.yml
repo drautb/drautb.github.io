@@ -1,5 +1,5 @@
 name: Tech Tumbleweeds
-url: http://drautb.github.io
+url: https://drautb.github.io
 paginate: 10
 baseurl: /
 destination: ./_site
