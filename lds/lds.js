@@ -1,22 +1,51 @@
-var stocksApp = angular.module('lds-app', []);
+var app = angular.module('drautb.lds', []);
 
-stocksApp.controller('ldsCtrl', ['$scope', '$http', function($scope, $http) {
+app.controller('LdsController', ['$scope', '$http', function($scope, $http) {
 
-  var SIGNIN_URL = "https://ident.lds.org/sso/UI/Login";
+  var PP6_UNIT_ID = 15172;
+
+  var DOMAIN = 'https://lcr-proxy.herokuapp.com/';
+  var SIGNIN_URL = DOMAIN + 'login.html';
+  var MEMBER_INFO_URL = DOMAIN + 'htvt/services/v1/' + PP6_UNIT_ID + '/members';
 
   $scope.loggedIn = false;
-  $scope.authToken = undefined;
+  $scope.user = {};
+  $scope.memberInfo = {};
+
+  function login() {
+    return $http({
+      method: 'POST',
+      url: SIGNIN_URL,
+      data: $.param({
+        username: $scope.user.name, 
+        password: $scope.user.password
+      }),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      withCredentials: true
+    });
+  };
+
+  function getMemberInfo() {
+    $http({
+      method: 'GET',
+      url: MEMBER_INFO_URL,
+      withCredentials: true
+    }).then(function(response) {
+      $scope.memberInfo = response.data;
+    });
+  };
 
   $scope.login = function() {
-    $http.post(SIGNIN_URL, {
-      headers: {
-        "Content-Type": "application/json"
-      },
-      data: {
-        username: $scope.username,
-        password: $scope.password
-    }}).then(function(response) {
-      consol.log(response);
+    login().then(function(response) {
+      console.log('RESPONSE STATUS: ' + response.status);
+      if (response.status == 200) {
+        $scope.loggedIn = true;
+        getMemberInfo();
+      } else {
+        alert('Login Failed! ' + response.status);
+      }
     });
   };
 
