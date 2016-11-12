@@ -6,5 +6,4 @@ destination: ./_site
 highlighter: pygments
 future: true
 permalink: /:year/:month/:day/:title/
-markdown: redcarpet
 excerpt_separator: <!--more-->
