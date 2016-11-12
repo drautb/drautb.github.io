@@ -3,7 +3,7 @@ url: https://drautb.github.io
 paginate: 10
 baseurl: /
 destination: ./_site
-highlighter: pygments
+highlighter: rouge
 future: true
 permalink: /:year/:month/:day/:title/
 excerpt_separator: <!--more-->
