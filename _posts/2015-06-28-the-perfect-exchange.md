@@ -24,7 +24,7 @@ Sounds simple enough to me. Now, how do I build it?
 
 ### Architecture
 
-<iframe frameborder="0" style="width:100%;height:403px" src="https://www.draw.io/?chrome=0&gapi=0#DAtlas.html"></iframe>
+<iframe frameborder="0" style="width:100%;height:403px" src="https://www.draw.io/?chrome=0&amp;gapi=0#DAtlas.html"></iframe>
 
 At a high-level, I think all I'll need is a [Raspberry Pi][3] (perhaps a kit like [this?][5]) and a [1TB External HD][4]. 
 

@@ -19,7 +19,7 @@ Dialog:
 
 <!--more-->
 
-``` cmake
+```cmake
 set(MACOSX_BUNDLE_NAME setup) 
 add_executable(setup MACOSX_BUNDLE ${SETUP_SRCS})
 target_link_libraries(setup ${SETUP_LIBS})
