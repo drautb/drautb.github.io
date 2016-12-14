@@ -1,6 +1,7 @@
-name: Tech Tumbleweeds
+name: Ben Draut
 url: https://drautb.github.io
-paginate: 10
+paginate: 1
+paginate_path: "/blog/page:num/"
 baseurl: /
 destination: ./_site
 highlighter: rouge
