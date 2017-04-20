@@ -9,6 +9,7 @@ app.controller('defaultCtrl', ['$scope', '$http', function($scope, $http) {
 
     var contentType = 'application/' + $scope.templateType;
 
+    // $http.post('http://pseudo-localhost:5000/cloudformation/2010-09-09/template',
     $http.post('https://cfn-policy-generator.herokuapp.com/cloudformation/2010-09-09/template',
       $scope.templateBody,
       {
@@ -19,7 +20,8 @@ app.controller('defaultCtrl', ['$scope', '$http', function($scope, $http) {
         console.log('Response received. status=' + response.status);
         $scope.policyBody = JSON.stringify(response.data, null, 2);
       }, function(_, error) {
-        alert('Policy generation failed: ' + error.message);
+        console.log('Error response: ' + JSON.stringify(error));
+        alert('Policy generation failed. Please try again.');
       });
   };
 
