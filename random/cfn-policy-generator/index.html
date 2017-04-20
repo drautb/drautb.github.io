@@ -1,0 +1,42 @@
+---
+layout: default
+title: CloudFormation Policy Generator
+---
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+<script type="text/javascript" src="cfn-policy-generator.js"></script>
+
+<!-- <link rel="stylesheet" type="text/css" href="lds.css"> -->
+
+{% raw %}
+<div ng-app="cfn-policy-generator-app">
+  <h2>CloudFormation Policy Generator</h2>
+  <br/>
+  <p>
+  Attempts to generate the least-privileged IAM policy required in order to execute
+  an AWS CloudFormation template. Uses
+  <a href="https://github.com/drautb/cfn-policy-generator">CFN Policy Generator</a>.
+  </p>
+  <div ng-controller="defaultCtrl">
+    <form>
+      <h3>Template Body:</h3>
+      <textarea ng-model="templateBody" cols="80" rows="20"></textarea>
+      <br/><br/>
+
+      <h3>Template Type:</h3>
+      <input type="radio" ng-model="templateType" name="type" value="json">JSON<br>
+      <input type="radio" ng-model="templateType" name="type" value="x-yaml">YAML<br>
+      <br/>
+
+      <button ng-click="generatePolicy()">Generate Policy</button>
+      <br/><br/>
+    </form>
+
+    <hr/>
+
+    <h3>Generated Policy:</h3>
+    <textarea ng-model="policyBody" cols="80" rows="20"></textarea>
+    <br/><br/>
+    <br/>
+  </div>
+</div>
