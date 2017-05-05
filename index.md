@@ -8,7 +8,7 @@ layout: default
 
 ### Job
 
-* Member the PaaS team at [FamilySearch][1]. We spend a lot of time writing Java code and working with [AWS][2].
+* Member the PaaS team at [FamilySearch][1] (April 2014). We spend a lot of time writing Java code and working with [AWS][2].
 
 ### Education
 
