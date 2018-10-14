@@ -7,7 +7,7 @@ app.controller('defaultCtrl', ['$scope', function($scope) {
     'Ben and Brittney',
     'Michael and Rachel',
     'Mindy and Michael',
-    'Joseph',
+//    'Joseph', restore when he's back from his mission.
     'Becky'
   ];
 
@@ -36,4 +36,3 @@ app.controller('defaultCtrl', ['$scope', function($scope) {
   };
 
 }]);
-

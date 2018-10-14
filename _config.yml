@@ -8,3 +8,4 @@ highlighter: rouge
 future: true
 permalink: /:year/:month/:day/:title/
 excerpt_separator: <!--more-->
+plugins: [jekyll-paginate]
