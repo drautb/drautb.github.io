@@ -19,10 +19,7 @@ layout: default
 ## Games
 
 <div>
-  <br/>
-  <div>
-    <iframe frameborder="0" src="https://itch.io/embed/1366765" width="552" height="167"><a href="https://grassbladeentertainment.itch.io/greebles">Greebles!</a></iframe>
-  </div>
+  <iframe frameborder="0" src="https://itch.io/embed/1366765" width="552" height="167"><a href="https://grassbladeentertainment.itch.io/greebles">Greebles!</a></iframe>
 </div>
 
 [1]: https://familysearch.org
