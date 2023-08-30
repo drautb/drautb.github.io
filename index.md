@@ -8,12 +8,13 @@ layout: default
 
 ### Job
 
-* Software Engineer at [FamilySearch][1] (April 2014).
+* Software Engineer at [AWS][5] (October 2022 - Present).
+* Software Engineer at [FamilySearch][1] (April 2014 - October 2022).
 
 ### Education
 
 * 2014 - B.S. in Computer Science from [BYU][2].
-* 2019 - M.S. in Computer Science at the [University of Utah][3]. ([Thesis][4]).
+* 2019 - M.S. in Computer Science from the [University of Utah][3]. ([Thesis][4]).
 
 
 ## Games
@@ -26,4 +27,5 @@ layout: default
 [2]: https://byu.edu
 [3]: https://utah.edu
 [4]: https://github.com/drautb/masters-thesis/raw/master/manuscript/thesis-final-draft.pdf
+[5]: https://aws.amazon.com/
 
