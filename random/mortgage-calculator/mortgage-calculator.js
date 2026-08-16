@@ -90,14 +90,14 @@ const MortgageCalculator = (() => {
     const amount = asNumber(value && value.amount);
     return {
       amount: amount === null ? 0 : Math.max(0, amount),
-      start: value && value.start === 'origin' ? 'origin' : 'next'
+      start: value && value.start === 'origin' ? 'origin' : 'projected'
     };
   }
 
   function recurringExtraForMonth(recurringExtra, month, referenceMonth = currentMonth()) {
     const recurring = normalizeRecurringExtra(recurringExtra);
     if (recurring.amount === 0) return 0;
-    return recurring.start === 'origin' || month >= addMonths(referenceMonth, 1) ? recurring.amount : 0;
+    return recurring.start === 'origin' || month >= referenceMonth ? recurring.amount : 0;
   }
 
   function defaultScenario(name = 'My mortgage') {
@@ -150,7 +150,7 @@ const MortgageCalculator = (() => {
     scenario.payments = Array.from({ length: paymentCount }, (_, index) => {
       const month = addMonths(scenario.loan.firstPaymentMonth, index);
       const old = existing.get(month);
-      const extraPrincipal = Math.max(0, asNumber(old && old.extraPrincipal) || 0);
+      const extraPrincipal = asNumber(old && old.extraPrincipal) || 0;
       const isRegularOverride = Boolean(old && old.isRegularOverride);
       return {
         month,
@@ -178,9 +178,10 @@ const MortgageCalculator = (() => {
       const configuredRegular = baseline ? contractualPayment : asNumber(record.regularPayment);
       const regularPayment = configuredRegular === null ? contractualPayment : Math.max(0, configuredRegular);
       const configuredExtra = baseline ? 0 : asNumber(record.extraPrincipal);
-      const oneTimeExtraPrincipal = configuredExtra === null ? 0 : Math.max(0, configuredExtra);
+      const extraAdjustment = configuredExtra === null ? 0 : configuredExtra;
       const recurringExtraPrincipal = baseline ? 0 : recurringExtraForMonth(recurringExtra, month);
-      const extraPrincipal = money(oneTimeExtraPrincipal + recurringExtraPrincipal);
+      const oneTimeExtraPrincipal = Math.max(0, extraAdjustment);
+      const extraPrincipal = money(Math.max(0, extraAdjustment + recurringExtraPrincipal));
       const openingBalance = balance;
       const interest = money(openingBalance * monthlyRate);
       const requestedTotal = money(regularPayment + extraPrincipal);
@@ -320,7 +321,7 @@ const MortgageCalculator = (() => {
         seenMonths.add(payment.month);
         const regularPayment = asNumber(payment.regularPayment);
         const extraPrincipal = asNumber(payment.extraPrincipal);
-        if ((regularPayment !== null && regularPayment < 0) || (extraPrincipal !== null && extraPrincipal < 0)) throw new Error('The imported schedule contains a negative payment.');
+        if (regularPayment !== null && regularPayment < 0) throw new Error('The imported schedule contains a negative payment.');
         return {
           month: payment.month,
           regularPayment: regularPayment === null ? 0 : regularPayment,
@@ -507,10 +508,10 @@ const MortgageCalculator = (() => {
     setText('metric-extra-detail', `${formatMoney(historicalExtra)} actual · ${formatMoney(futureExtra)} projected`);
 
     const reconciliation = document.getElementById('reconciliation');
-    if (scenario.loan.statementBalance !== null && currentRows.length) {
-      const difference = money(scenario.loan.statementBalance - currentBalance);
+    const difference = scenario.loan.statementBalance === null ? null : money(scenario.loan.statementBalance - currentBalance);
+    if (difference !== null && currentRows.length && Math.abs(difference) >= 0.005) {
       reconciliation.hidden = false;
-      reconciliation.textContent = `Your statement balance is ${formatMoney(scenario.loan.statementBalance)}. The model differs by ${formatMoney(Math.abs(difference))} ${difference > 0 ? 'below' : difference < 0 ? 'above' : 'from'} the statement. Payment timing, lender interest rules, or omitted transactions can cause a difference; the model has not been changed automatically.`;
+      reconciliation.textContent = `Your statement balance is ${formatMoney(scenario.loan.statementBalance)}. The model differs by ${formatMoney(Math.abs(difference))} ${difference > 0 ? 'below' : 'above'} the statement. Payment timing, lender interest rules, or omitted transactions can cause a difference; the model has not been changed automatically.`;
     } else {
       reconciliation.hidden = true;
       reconciliation.textContent = '';
@@ -537,12 +538,12 @@ const MortgageCalculator = (() => {
       className: monthDelta < 0 ? 'amount-savings' : 'amount-debt'
     };
     const values = [
-      { label: 'Payoff date', original: formatMonth(baseline.rows[baseline.rows.length - 1].month), planned: formatMonth(plan.rows[plan.rows.length - 1].month), delta: durationDelta },
-      { label: 'Number of payments', original: String(baseline.rows.length), planned: String(plan.rows.length), delta: monthDelta === 0 ? { text: '—', className: '' } : { text: String(monthDelta), className: monthDelta < 0 ? 'amount-savings' : 'amount-debt' } },
-      { label: 'Total paid', original: formatMoney(baselineTotals.totalPaid), planned: formatMoney(planTotals.totalPaid), delta: moneyDelta(planTotals.totalPaid, baselineTotals.totalPaid) },
-      { label: 'Total interest', original: formatMoney(baselineTotals.interest), planned: formatMoney(planTotals.interest), delta: moneyDelta(planTotals.interest, baselineTotals.interest), valueClass: 'amount-interest' },
-      { label: 'Total principal', original: formatMoney(baselineTotals.principal), planned: formatMoney(planTotals.principal), delta: { text: '—', className: '' }, valueClass: 'amount-principal' },
-      { label: 'Extra principal', original: formatMoney(0), planned: formatMoney(planTotals.extraPrincipal), delta: moneyDelta(planTotals.extraPrincipal, 0, true), valueClass: 'amount-savings' }
+      { label: 'Payoff Date', original: formatMonth(baseline.rows[baseline.rows.length - 1].month), planned: formatMonth(plan.rows[plan.rows.length - 1].month), delta: durationDelta },
+      { label: 'Number of Payments', original: String(baseline.rows.length), planned: String(plan.rows.length), delta: monthDelta === 0 ? { text: '—', className: '' } : { text: String(monthDelta), className: monthDelta < 0 ? 'amount-savings' : 'amount-debt' } },
+      { label: 'Total Paid', original: formatMoney(baselineTotals.totalPaid), planned: formatMoney(planTotals.totalPaid), delta: moneyDelta(planTotals.totalPaid, baselineTotals.totalPaid) },
+      { label: 'Total Interest', original: formatMoney(baselineTotals.interest), planned: formatMoney(planTotals.interest), delta: moneyDelta(planTotals.interest, baselineTotals.interest), valueClass: 'amount-interest' },
+      { label: 'Total Principal', original: formatMoney(baselineTotals.principal), planned: formatMoney(planTotals.principal), delta: { text: '—', className: '' }, valueClass: 'amount-principal' },
+      { label: 'Extra Principal', original: formatMoney(0), planned: formatMoney(planTotals.extraPrincipal), delta: moneyDelta(planTotals.extraPrincipal, 0, true), valueClass: 'amount-savings' }
     ];
     values.forEach((value) => {
       const row = document.createElement('tr');
@@ -607,7 +608,7 @@ const MortgageCalculator = (() => {
     input.dataset.month = row.month;
     input.dataset.field = field;
     input.value = formatNumberInput(value);
-    input.setAttribute('aria-label', `${field === 'regularPayment' ? 'Principal and interest' : 'One-time extra principal'} for ${formatMonth(row.month)}`);
+    input.setAttribute('aria-label', `${field === 'regularPayment' ? 'Principal and interest' : 'Extra Principal'} for ${formatMonth(row.month)}`);
     if (additionalClass) input.classList.add(additionalClass);
     return input;
   }
@@ -616,7 +617,7 @@ const MortgageCalculator = (() => {
     const button = document.getElementById('toggle-schedule');
     const canToggle = showAllSchedule || rows.length > displayedRowCount;
     button.hidden = !canToggle;
-    button.textContent = showAllSchedule ? 'Show nearby months' : `Show all ${rows.length} months`;
+    button.textContent = showAllSchedule ? 'Show Nearby Months' : `Show All ${rows.length} Months`;
     button.setAttribute('aria-expanded', String(showAllSchedule));
   }
 
@@ -642,8 +643,8 @@ const MortgageCalculator = (() => {
       regularCell.appendChild(editableInput(row, 'regularPayment', scenarioPayment.regularPayment, regularClass));
       tableRow.appendChild(regularCell);
       const extraCell = document.createElement('td');
-      const extraClass = scenarioPayment.extraPrincipal > 0 ? 'edited' : '';
-      extraCell.appendChild(editableInput(row, 'extraPrincipal', scenarioPayment.extraPrincipal, extraClass));
+      const extraClass = Math.abs(scenarioPayment.extraPrincipal || 0) > 0.005 || row.recurringExtraPrincipal > 0 ? 'edited' : '';
+      extraCell.appendChild(editableInput(row, 'extraPrincipal', row.requestedExtraPrincipal, extraClass));
       tableRow.appendChild(extraCell);
       appendCalculatedCell(tableRow, 'totalPayment', formatMoney(row.totalPayment));
       const interestCell = appendCalculatedCell(tableRow, 'interest', formatMoney(row.interest));
@@ -850,7 +851,7 @@ const MortgageCalculator = (() => {
       const amount = asNumber(event.target.value);
       recurring.amount = amount === null ? 0 : Math.max(0, amount);
     } else if (event.target.name === 'recurringExtraStart') {
-      recurring.start = event.target.value === 'origin' ? 'origin' : 'next';
+      recurring.start = event.target.value === 'origin' ? 'origin' : 'projected';
     } else {
       return;
     }
@@ -867,7 +868,12 @@ const MortgageCalculator = (() => {
     const payment = scenario.payments.find((item) => item.month === month);
     if (!payment) return;
     const value = asNumber(input.value);
-    payment[field] = value === null ? 0 : Math.max(0, value);
+    if (field === 'extraPrincipal') {
+      const recurringAmount = recurringExtraForMonth(scenario.recurringExtra, month);
+      payment.extraPrincipal = Math.max(-recurringAmount, (value === null ? 0 : Math.max(0, value)) - recurringAmount);
+    } else {
+      payment[field] = value === null ? 0 : Math.max(0, value);
+    }
     if (field === 'regularPayment') {
       const contractual = calculateContractualPayment(scenario.loan.principal, scenario.loan.annualRate, scenario.loan.termYears);
       payment.isRegularOverride = Math.abs(payment.regularPayment - contractual) > 0.005;

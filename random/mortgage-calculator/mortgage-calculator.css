@@ -4,10 +4,10 @@
   line-height: 1.45;
 }
 
-:root { --ink: #1e2935; --muted: #657280; --surface: #ffffff; --canvas: #f4f7f8; --rule: #dbe3e8; --accent: #276f9f; --accent-soft: #eaf3f8; --principal: #3a647d; --interest: #657280; --positive: #1d7a45; --positive-soft: #eaf6ef; --debt: #ae3e3e; --debt-soft: #fbecec; }
-html { scroll-behavior: smooth; }
-body { background: var(--canvas); color: var(--ink); margin: 0; padding: 2rem 1.25rem 3rem; }
-.mortgage-calculator { margin: 0 auto; max-width: 1180px; }
+:root { --ink: #162d3d; --muted: #506775; --surface: #ffffff; --canvas: #eef3f6; --rule: #cbd9e0; --accent: #1672ad; --accent-soft: #e2f1fa; --principal: #2578a5; --interest: #7250a1; --positive: #1d7a45; --positive-soft: #eaf6ef; --debt: #ae3e3e; --debt-soft: #fbecec; }
+html { scroll-behavior: smooth; max-width: 100%; overflow-x: clip; }
+body { background: var(--canvas); color: var(--ink); margin: 0; max-width: 100%; overflow-x: clip; padding: 2rem 1.25rem 3rem; }
+.mortgage-calculator { margin: 0 auto; max-width: 1180px; min-width: 0; width: 100%; }
 .mortgage-calculator *, .mortgage-calculator *::before, .mortgage-calculator *::after { box-sizing: border-box; }
 .mortgage-calculator h1, .mortgage-calculator h2, .mortgage-calculator p { margin-top: 0; }
 .calculator-intro { margin-bottom: 1.5rem; max-width: 700px; }
@@ -51,7 +51,7 @@ body { background: var(--canvas); color: var(--ink); margin: 0; padding: 2rem 1.
 .scenario-actions { display: flex; flex-wrap: wrap; gap: .35rem; }
 .icon-button { align-items: center; min-width: 2.25rem; padding: .35rem !important; }
 .icon-button svg { fill: none; height: 1.15rem; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; width: 1.15rem; }
-.visually-hidden-input { height: 1px; opacity: 0; overflow: hidden; pointer-events: none; position: absolute; width: 1px; }
+.mortgage-calculator .visually-hidden-input { border: 0; clip: rect(0, 0, 0, 0); clip-path: inset(50%); height: 1px; min-height: 1px; opacity: 0; overflow: hidden; padding: 0; pointer-events: none; position: absolute; white-space: nowrap; width: 1px; }
 .recurring-controls { display: flex; gap: .9rem; max-width: 410px; }
 .recurring-controls .field { flex: 1; }
 .save-status { color: var(--muted); font-size: .8rem; min-height: 1rem; margin: 0 0 .5rem; }

@@ -18,10 +18,10 @@
         <a href="#loan"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"></path><path d="M6 20V8h12v12"></path><path d="m4 8 8-5 8 5"></path><path d="M9 12h6M9 16h6"></path></svg>Loan</a>
         <a href="#overpayments"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><path d="M12 8v8M8 12h8"></path></svg>Overpayments</a>
         <a href="#overview"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="1"></rect><path d="M8 9h8M8 13h5M8 17h7"></path></svg>Overview</a>
-        <a href="#balance"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5"></path><path d="M4 19h16"></path><path d="m7 15 4-4 3 2 4-6"></path></svg>Balance graph</a>
+        <a href="#balance"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5"></path><path d="M4 19h16"></path><path d="m7 15 4-4 3 2 4-6"></path></svg>Balance Graph</a>
         <a href="#comparison"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h12"></path><path d="m13 5 4 3-4 3"></path><path d="M19 16H7"></path><path d="m11 13-4 3 4 3"></path></svg>Comparison</a>
-        <a href="#annual"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="1"></rect><path d="M8 3v4M16 3v4M4 10h16M8 14h3M13 14h3M8 17h3"></path></svg>Annual detail</a>
-        <a href="#schedule"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14M5 12h14M5 19h14"></path><circle cx="3" cy="5" r=".5"></circle><circle cx="3" cy="12" r=".5"></circle><circle cx="3" cy="19" r=".5"></circle></svg>Payment history</a>
+        <a href="#annual"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="1"></rect><path d="M8 3v4M16 3v4M4 10h16M8 14h3M13 14h3M8 17h3"></path></svg>Annual Detail</a>
+        <a href="#schedule"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14M5 12h14M5 19h14"></path><circle cx="3" cy="5" r=".5"></circle><circle cx="3" cy="12" r=".5"></circle><circle cx="3" cy="19" r=".5"></circle></svg>Payment History</a>
       </aside>
 
       <main class="calculator-content">
@@ -37,12 +37,12 @@
           <div id="scenario-tabs" class="scenario-tabs" role="radiogroup" aria-label="Mortgage scenarios"></div>
           <div class="scenario-toolbar">
             <div class="scenario-name-field">
-              <label for="scenario-name">Scenario name</label>
+              <label for="scenario-name">Scenario Name</label>
               <input id="scenario-name" type="text" maxlength="80" autocomplete="off">
               <button id="rename-scenario" type="button">Save</button>
             </div>
             <div class="scenario-actions" aria-label="Scenario actions">
-              <button id="new-scenario" type="button">New scenario</button>
+              <button id="new-scenario" type="button">New Scenario</button>
               <button id="duplicate-scenario" type="button" class="icon-button" aria-label="Duplicate scenario" title="Duplicate scenario">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="1"></rect><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"></path></svg>
               </button>
@@ -64,28 +64,28 @@
           <section class="content-section" id="loan" aria-labelledby="loan-heading">
             <div class="section-heading">
               <div>
-                <h2 id="loan-heading">Original loan</h2>
+                <h2 id="loan-heading">Original Loan</h2>
               </div>
             </div>
             <div class="input-grid">
               <div class="field">
-                <label for="principal">Original principal</label>
+                <label for="principal">Original Principal</label>
                 <input id="principal" name="principal" type="number" min="0.01" step="0.01" inputmode="decimal" required>
               </div>
               <div class="field">
-                <label for="annual-rate">Annual interest rate</label>
+                <label for="annual-rate">Annual Interest Rate</label>
                 <div class="input-suffix"><input id="annual-rate" name="annualRate" type="number" min="0" max="100" step="0.001" inputmode="decimal" required><span aria-hidden="true">%</span></div>
               </div>
               <div class="field">
-                <label for="term-years">Original term</label>
+                <label for="term-years">Original Term</label>
                 <div class="input-suffix"><input id="term-years" name="termYears" type="number" min="1" max="50" step="1" inputmode="numeric" required><span aria-hidden="true">years</span></div>
               </div>
               <div class="field">
-                <label for="first-payment-month">First payment month</label>
+                <label for="first-payment-month">First Payment Month</label>
                 <input id="first-payment-month" name="firstPaymentMonth" type="month" required>
               </div>
               <div class="field">
-                <label for="statement-balance">Statement balance <span class="optional">optional</span></label>
+                <label for="statement-balance">Statement Balance <span class="optional">optional</span></label>
                 <input id="statement-balance" name="statementBalance" type="number" min="0" step="0.01" inputmode="decimal">
               </div>
             </div>
@@ -95,19 +95,19 @@
           <section class="content-section" id="overpayments" aria-labelledby="recurring-heading">
             <div class="section-heading">
               <div>
-                <h2 id="recurring-heading">Recurring extra principal</h2>
+                <h2 id="recurring-heading">Recurring Extra Principal</h2>
               </div>
             </div>
             <div class="recurring-controls">
               <div class="field">
-                <label for="recurring-extra">Extra principal</label>
+                <label for="recurring-extra">Extra Principal</label>
                 <input id="recurring-extra" name="recurringExtraAmount" type="number" min="0" step="0.01" inputmode="decimal">
               </div>
               <div class="field">
                 <label for="recurring-start">Start</label>
                 <select id="recurring-start" name="recurringExtraStart">
-                  <option value="next">With the next payment</option>
-                  <option value="origin">From the first payment</option>
+                  <option value="projected">All Projected Payments</option>
+                  <option value="origin">From the First Payment</option>
                 </select>
               </div>
             </div>
@@ -122,11 +122,11 @@
               </div>
             </div>
             <div class="metric-grid">
-              <article class="metric metric-neutral"><p>Monthly payment</p><strong id="metric-payment">—</strong></article>
-              <article class="metric metric-debt"><p>Current balance</p><strong id="metric-current-balance">—</strong><small id="metric-current-balance-detail"></small></article>
-              <article class="metric metric-positive"><p>Planned payoff</p><strong id="metric-payoff">—</strong><small id="metric-time-saved"></small></article>
-              <article class="metric metric-positive"><p>Interest saved</p><strong id="metric-interest-saved">—</strong><small id="metric-interest-detail"></small></article>
-              <article class="metric metric-positive"><p>Extra principal</p><strong id="metric-extra-principal">—</strong><small id="metric-extra-detail"></small></article>
+              <article class="metric metric-neutral"><p>Monthly Payment</p><strong id="metric-payment">—</strong></article>
+              <article class="metric metric-debt"><p>Current Balance</p><strong id="metric-current-balance">—</strong><small id="metric-current-balance-detail"></small></article>
+              <article class="metric metric-positive"><p>Planned Payoff</p><strong id="metric-payoff">—</strong><small id="metric-time-saved"></small></article>
+              <article class="metric metric-positive"><p>Interest Saved</p><strong id="metric-interest-saved">—</strong><small id="metric-interest-detail"></small></article>
+              <article class="metric metric-positive"><p>Extra Principal</p><strong id="metric-extra-principal">—</strong><small id="metric-extra-detail"></small></article>
             </div>
           </section>
 
@@ -135,7 +135,7 @@
           <section class="content-section" id="balance" aria-labelledby="chart-heading">
             <div class="section-heading">
               <div>
-                <h2 id="chart-heading">Balance graph</h2>
+                <h2 id="chart-heading">Balance Graph</h2>
               </div>
               <div class="chart-legend" aria-label="Chart legend">
                 <span><i class="legend-line baseline" aria-hidden="true"></i>Original</span>
@@ -147,7 +147,7 @@
             <div id="chart-wrap" class="chart-wrap" tabindex="0" aria-describedby="chart-description">
               <svg id="balance-chart" role="img" aria-labelledby="chart-title chart-description" viewBox="0 0 900 360" preserveAspectRatio="xMidYMid meet"></svg>
             </div>
-            <p id="chart-title" class="sr-only">Mortgage principal balance graph</p>
+            <p id="chart-title" class="sr-only">Mortgage Principal Balance Graph</p>
             <p id="chart-description" class="sr-only">The chart compares the original payment schedule with recorded and planned payments. Use the payment history for exact values.</p>
           </section>
 
@@ -159,7 +159,7 @@
             </div>
             <div class="table-wrap" tabindex="0" role="region" aria-label="Mortgage comparison table">
               <table id="comparison-table">
-                <thead><tr><th scope="col">Measure</th><th scope="col">Original</th><th scope="col">Your plan</th><th scope="col">Change</th></tr></thead>
+                <thead><tr><th scope="col">Measure</th><th scope="col">Original</th><th scope="col">Your Plan</th><th scope="col">Change</th></tr></thead>
                 <tbody></tbody>
               </table>
             </div>
@@ -168,7 +168,7 @@
           <section class="content-section" id="annual" aria-labelledby="annual-heading">
             <div class="section-heading">
               <div>
-                <h2 id="annual-heading">Annual detail</h2>
+                <h2 id="annual-heading">Annual Detail</h2>
               </div>
             </div>
             <div class="table-wrap" tabindex="0" role="region" aria-label="Annual mortgage detail table">
@@ -182,13 +182,13 @@
           <section class="content-section" id="schedule" aria-labelledby="schedule-heading">
             <div class="section-heading schedule-heading">
               <div>
-                <h2 id="schedule-heading">Payment history</h2>
+                <h2 id="schedule-heading">Payment History</h2>
               </div>
-              <button id="toggle-schedule" type="button" aria-expanded="false">Show all months</button>
+              <button id="toggle-schedule" type="button" aria-expanded="false">Show All Months</button>
             </div>
             <div class="table-wrap schedule-wrap" tabindex="0" role="region" aria-label="Editable mortgage payment history table">
               <table id="schedule-table">
-                <thead><tr><th scope="col">Month</th><th scope="col">Status</th><th scope="col">P&amp;I</th><th scope="col">One-time extra</th><th scope="col">Total</th><th scope="col">Interest</th><th scope="col">Principal</th><th scope="col">Ending</th></tr></thead>
+                <thead><tr><th scope="col">Month</th><th scope="col">Status</th><th scope="col">P&amp;I</th><th scope="col">Extra Principal</th><th scope="col">Total</th><th scope="col">Interest</th><th scope="col">Principal</th><th scope="col">Ending</th></tr></thead>
                 <tbody></tbody>
               </table>
             </div>

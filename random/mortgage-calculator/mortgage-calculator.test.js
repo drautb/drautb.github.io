@@ -50,14 +50,22 @@ closeTo(withExtra.rows[35].endingBalance, baseline.rows[35].endingBalance);
 assert.ok(calculator.totals(withExtra.rows).interest < calculator.totals(baseline.rows).interest, 'future overpayments should reduce interest');
 
 const oneTime = calculator.calculateSchedule(loan, [{ month: '2024-02', regularPayment: monthlyPayment, extraPrincipal: 5000 }]);
+assert.equal(calculator.recurringExtraForMonth({ amount: 75, start: 'next' }, '2026-08', '2026-08'), 75);
 
 const recurringFromOrigin = calculator.calculateSchedule(loan, [], false, { amount: 200, start: 'origin' });
 assert.equal(recurringFromOrigin.error, '');
 assert.equal(recurringFromOrigin.rows[0].recurringExtraPrincipal, 200);
 assert.ok(recurringFromOrigin.rows.length < baseline.rows.length, 'recurring extras from origination should reduce the payoff term');
 
-assert.equal(calculator.recurringExtraForMonth({ amount: 75, start: 'next' }, '2026-08', '2026-08'), 0);
-assert.equal(calculator.recurringExtraForMonth({ amount: 75, start: 'next' }, '2026-09', '2026-08'), 75);
+const recurringDisplaySchedule = calculator.calculateSchedule(loan, [], false, { amount: 150, start: 'origin' });
+assert.equal(recurringDisplaySchedule.rows[0].requestedExtraPrincipal, 150);
+const recurringOptOutSchedule = calculator.calculateSchedule(loan, [{ month: '2024-01', regularPayment: monthlyPayment, extraPrincipal: -150 }], false, { amount: 150, start: 'origin' });
+assert.equal(recurringOptOutSchedule.rows[0].requestedExtraPrincipal, 0);
+assert.equal(recurringOptOutSchedule.rows[1].requestedExtraPrincipal, 150);
+
+assert.equal(calculator.recurringExtraForMonth({ amount: 75, start: 'projected' }, '2026-07', '2026-08'), 0);
+assert.equal(calculator.recurringExtraForMonth({ amount: 75, start: 'projected' }, '2026-08', '2026-08'), 75);
+assert.equal(calculator.recurringExtraForMonth({ amount: 75, start: 'projected' }, '2026-09', '2026-08'), 75);
 
 const recurringAndOneTime = calculator.calculateSchedule(loan, [{ month: '2024-01', regularPayment: monthlyPayment, extraPrincipal: 100 }], false, { amount: 200, start: 'origin' });
 assert.equal(recurringAndOneTime.rows[0].extraPrincipal, 300);
