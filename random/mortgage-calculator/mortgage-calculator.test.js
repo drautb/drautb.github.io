@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 
 const source = fs.readFileSync(`${__dirname}/mortgage-calculator.js`, 'utf8');
-const context = { console, Math, Date, Intl, Number, String, Array, Map, Set, JSON, Error, crypto: globalThis.crypto };
+const context = { console, Math, Date, Intl, Number, String, Array, Map, Set, JSON, Error, Uint8Array, TextEncoder, TextDecoder, btoa, atob, crypto: globalThis.crypto };
 vm.createContext(context);
 vm.runInContext(`${source}\nglobalThis.calculator = MortgageCalculator;`, context);
 const calculator = context.calculator;
@@ -122,6 +122,27 @@ const unpayablePlan = calculator.calculateSchedule(zeroPaymentLoan, zeroPayments
 assert.match(unpayablePlan.error, /do not pay off/);
 assert.equal(unpayablePlan.rows.at(-1).totalPayment, 0);
 
+
+const shareSource = calculator.normalizeScenario({
+  name: 'Shared Mortgage',
+  loan,
+  recurringExtra: { amount: 150, start: 'projected' },
+  payments: [
+    { month: '2024-01', regularPayment: 1200, isRegularOverride: true, extraPrincipal: -150 },
+    { month: '2024-02', regularPayment: 0, isRegularOverride: false, extraPrincipal: 25 }
+  ]
+});
+const sharePayload = calculator.encodeScenarioForUrl(shareSource);
+assert.match(sharePayload, /^[A-Za-z0-9_-]+$/);
+const decodedShare = calculator.decodeScenarioFromUrl(sharePayload);
+assert.equal(decodedShare.name, 'Shared Mortgage');
+assert.equal(decodedShare.loan.principal, loan.principal);
+assert.equal(decodedShare.recurringExtra.amount, 150);
+assert.equal(decodedShare.recurringExtra.start, 'projected');
+assert.equal(decodedShare.payments[0].regularPayment, 1200);
+assert.equal(decodedShare.payments[0].extraPrincipal, -150);
+assert.equal(decodedShare.payments[1].extraPrincipal, 25);
+assert.throws(() => calculator.decodeScenarioFromUrl('not*a-valid-payload'), /malformed/);
 
 const realisticLoan = { principal: 500000, annualRate: 7.125, termYears: 30, firstPaymentMonth: '2024-01', statementBalance: null };
 const realisticSchedule = calculator.calculateSchedule(realisticLoan, [], true);

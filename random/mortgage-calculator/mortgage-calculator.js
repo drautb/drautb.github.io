@@ -334,6 +334,121 @@ const MortgageCalculator = (() => {
     return scenario;
   }
 
+  function encodeScenarioForUrl(scenario) {
+    if (!hasValidLoan(scenario.loan)) throw new Error('Only valid scenarios can be shared.');
+    const overrides = [];
+    scenario.payments.forEach((payment, index) => {
+      const regularOverride = payment.isRegularOverride ? money(payment.regularPayment) : null;
+      const extraAdjustment = Math.abs(payment.extraPrincipal || 0) >= 0.005 ? money(payment.extraPrincipal) : null;
+      if (regularOverride !== null || extraAdjustment !== null) overrides.push([index, regularOverride, extraAdjustment]);
+    });
+    const payload = {
+      v: 1,
+      n: scenario.name,
+      l: {
+        p: scenario.loan.principal,
+        r: scenario.loan.annualRate,
+        t: scenario.loan.termYears,
+        f: scenario.loan.firstPaymentMonth,
+        b: scenario.loan.statementBalance
+      },
+      x: {
+        a: scenario.recurringExtra.amount,
+        s: scenario.recurringExtra.start
+      },
+      o: overrides
+    };
+    if (typeof TextEncoder === 'undefined' || typeof btoa === 'undefined') throw new Error('This browser cannot encode share links.');
+    const bytes = new TextEncoder().encode(JSON.stringify(payload));
+    let binary = '';
+    bytes.forEach((byte) => { binary += String.fromCharCode(byte); });
+    return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
+  }
+
+  function decodeScenarioFromUrl(encoded) {
+    if (typeof encoded !== 'string' || !/^[A-Za-z0-9_-]+$/.test(encoded)) throw new Error('The share link is malformed.');
+    if (typeof TextDecoder === 'undefined' || typeof atob === 'undefined') throw new Error('This browser cannot decode share links.');
+    const padded = encoded.replace(/-/g, '+').replace(/_/g, '/') + '='.repeat((4 - encoded.length % 4) % 4);
+    let payload;
+    try {
+      const binary = atob(padded);
+      const bytes = Uint8Array.from(binary, (character) => character.charCodeAt(0));
+      payload = JSON.parse(new TextDecoder().decode(bytes));
+    } catch (_) {
+      throw new Error('The share link could not be decoded.');
+    }
+    if (!payload || payload.v !== 1 || !payload.l || !Array.isArray(payload.o)) throw new Error('The share link uses an unsupported scenario format.');
+
+    const loan = {
+      principal: asNumber(payload.l.p),
+      annualRate: asNumber(payload.l.r),
+      termYears: asNumber(payload.l.t),
+      firstPaymentMonth: payload.l.f,
+      statementBalance: payload.l.b === null || payload.l.b === undefined ? null : asNumber(payload.l.b)
+    };
+    if (!hasValidLoan(loan)) throw new Error('The share link contains invalid loan details.');
+
+    const seenIndexes = new Set();
+    const payments = payload.o.map((override) => {
+      if (!Array.isArray(override) || override.length !== 3) throw new Error('The share link contains an invalid payment override.');
+      const index = asNumber(override[0]);
+      if (!Number.isInteger(index) || index < 0 || index >= loan.termYears * 12 || seenIndexes.has(index)) throw new Error('The share link contains an invalid payment override.');
+      seenIndexes.add(index);
+      const regularPayment = override[1] === null ? 0 : asNumber(override[1]);
+      const extraPrincipal = override[2] === null ? 0 : asNumber(override[2]);
+      if ((override[1] !== null && (!Number.isFinite(regularPayment) || regularPayment < 0)) || !Number.isFinite(extraPrincipal)) throw new Error('The share link contains an invalid payment override.');
+      return {
+        month: addMonths(loan.firstPaymentMonth, index),
+        regularPayment,
+        isRegularOverride: override[1] !== null,
+        extraPrincipal
+      };
+    });
+
+    return normalizeScenario({
+      name: typeof payload.n === 'string' && payload.n.trim() ? payload.n : 'Shared Scenario',
+      loan,
+      recurringExtra: {
+        amount: payload.x ? payload.x.a : 0,
+        start: payload.x ? payload.x.s : 'projected'
+      },
+      payments
+    });
+  }
+
+  function getShareUrl(scenario) {
+    if (typeof window === 'undefined') throw new Error('Share links are available only in a browser.');
+    const encoded = encodeScenarioForUrl(scenario);
+    if (encoded.length > 8000) throw new Error('This scenario is too large to embed safely in a share link. Export it as JSON instead.');
+    const url = new URL(window.location.href);
+    url.hash = `scenario=${encoded}`;
+    return url.toString();
+  }
+
+  function syncShareUrl(scenario) {
+    if (typeof window === 'undefined' || !window.history) return null;
+    try {
+      const shareUrl = getShareUrl(scenario);
+      if (shareUrl !== window.location.href) window.history.replaceState(null, '', shareUrl);
+      return shareUrl;
+    } catch (error) {
+      setStatus(error instanceof Error ? error.message : 'The share link could not be updated.');
+      return null;
+    }
+  }
+
+  function loadSharedScenarioFromUrl() {
+    if (typeof window === 'undefined' || !window.location.hash) return { scenario: null, error: '', encoded: '' };
+    const params = new URLSearchParams(window.location.hash.slice(1));
+    const encoded = params.get('scenario');
+    if (!encoded) return { scenario: null, error: '', encoded: '' };
+    try {
+      return { scenario: decodeScenarioFromUrl(encoded), error: '', encoded };
+    } catch (error) {
+      return { scenario: null, error: error instanceof Error ? error.message : 'The share link could not be loaded.', encoded };
+    }
+  }
+
   function canUseStorage() {
     try {
       const probe = `${STORAGE_KEY}:probe`;
@@ -831,6 +946,7 @@ const MortgageCalculator = (() => {
     renderAnnualTable(plan.rows);
     if (skipSchedule) refreshScheduleCalculations(plan.rows);
     else renderScheduleTable(scenario, plan.rows, plan.contractualPayment);
+    syncShareUrl(scenario);
   }
 
   function updateLoanFromForm(event) {
@@ -943,6 +1059,18 @@ const MortgageCalculator = (() => {
     setStatus('Scenario exported as JSON.');
   }
 
+  async function copyShareLink() {
+    const shareUrl = syncShareUrl(getSelectedScenario());
+    if (!shareUrl) return;
+    try {
+      if (!navigator.clipboard || !navigator.clipboard.writeText) throw new Error('Clipboard API unavailable');
+      await navigator.clipboard.writeText(shareUrl);
+      setStatus('Share Link Copied.');
+    } catch (_) {
+      window.prompt('Copy This Share Link', shareUrl);
+    }
+  }
+
   function importScenario(event) {
     const file = event.target.files && event.target.files[0];
     event.target.value = '';
@@ -1009,6 +1137,7 @@ const MortgageCalculator = (() => {
     document.getElementById('duplicate-scenario').addEventListener('click', duplicateScenario);
     document.getElementById('delete-scenario').addEventListener('click', deleteScenario);
     document.getElementById('export-scenario').addEventListener('click', exportScenario);
+    document.getElementById('copy-share-link').addEventListener('click', copyShareLink);
     document.getElementById('import-scenario-button').addEventListener('click', () => document.getElementById('import-scenario').click());
     document.getElementById('import-scenario').addEventListener('change', importScenario);
     document.getElementById('toggle-schedule').addEventListener('click', () => {
@@ -1020,6 +1149,21 @@ const MortgageCalculator = (() => {
   function init() {
     storageAvailable = canUseStorage();
     state = loadState();
+    const shared = loadSharedScenarioFromUrl();
+    if (shared.scenario) {
+      const matchingScenario = state.scenarios.find((scenario) => {
+        try {
+          return encodeScenarioForUrl(scenario) === shared.encoded;
+        } catch (_) {
+          return false;
+        }
+      });
+      if (matchingScenario) state.selectedScenarioId = matchingScenario.id;
+      else {
+        state.scenarios.push(shared.scenario);
+        state.selectedScenarioId = shared.scenario.id;
+      }
+    }
     const notice = document.getElementById('storage-notice');
     if (!storageAvailable) {
       notice.hidden = false;
@@ -1027,6 +1171,9 @@ const MortgageCalculator = (() => {
     } else if (storageRecoveryNotice) {
       notice.hidden = false;
       notice.textContent = storageRecoveryNotice;
+    } else if (shared.error) {
+      notice.hidden = false;
+      notice.textContent = shared.error;
     }
     bindEvents();
     render();
@@ -1044,6 +1191,8 @@ const MortgageCalculator = (() => {
     annualSummary,
     ensurePaymentSchedule,
     normalizeScenario,
+    encodeScenarioForUrl,
+    decodeScenarioFromUrl,
     init
   };
 })();
