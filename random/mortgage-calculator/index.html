@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mortgage Payoff Calculator</title>
+  <link rel="stylesheet" href="mortgage-calculator.css">
+</head>
+<body>
+  <div class="mortgage-calculator" data-calculator-root>
+    <header class="calculator-intro" id="top">
+      <h1>Mortgage Calculator</h1>
+    </header>
+
+    <div class="calculator-layout">
+      <aside class="section-nav" aria-label="Calculator sections">
+        <a href="#scenarios"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6"></rect><rect x="14" y="4" width="6" height="6"></rect><rect x="4" y="14" width="6" height="6"></rect><rect x="14" y="14" width="6" height="6"></rect></svg>Scenarios</a>
+        <a href="#loan"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"></path><path d="M6 20V8h12v12"></path><path d="m4 8 8-5 8 5"></path><path d="M9 12h6M9 16h6"></path></svg>Loan</a>
+        <a href="#overpayments"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><path d="M12 8v8M8 12h8"></path></svg>Overpayments</a>
+        <a href="#overview"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="1"></rect><path d="M8 9h8M8 13h5M8 17h7"></path></svg>Overview</a>
+        <a href="#balance"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5"></path><path d="M4 19h16"></path><path d="m7 15 4-4 3 2 4-6"></path></svg>Balance graph</a>
+        <a href="#comparison"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h12"></path><path d="m13 5 4 3-4 3"></path><path d="M19 16H7"></path><path d="m11 13-4 3 4 3"></path></svg>Comparison</a>
+        <a href="#annual"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="1"></rect><path d="M8 3v4M16 3v4M4 10h16M8 14h3M13 14h3M8 17h3"></path></svg>Annual detail</a>
+        <a href="#schedule"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14M5 12h14M5 19h14"></path><circle cx="3" cy="5" r=".5"></circle><circle cx="3" cy="12" r=".5"></circle><circle cx="3" cy="19" r=".5"></circle></svg>Payment history</a>
+      </aside>
+
+      <main class="calculator-content">
+        <p id="storage-notice" class="notice" hidden></p>
+        <p id="calculator-status" class="save-status" aria-live="polite"></p>
+
+        <section class="content-section scenario-section" id="scenarios" aria-labelledby="scenario-heading">
+          <div class="section-heading">
+            <div>
+              <h2 id="scenario-heading">Scenarios</h2>
+            </div>
+          </div>
+          <div id="scenario-tabs" class="scenario-tabs" role="radiogroup" aria-label="Mortgage scenarios"></div>
+          <div class="scenario-toolbar">
+            <div class="scenario-name-field">
+              <label for="scenario-name">Scenario name</label>
+              <input id="scenario-name" type="text" maxlength="80" autocomplete="off">
+              <button id="rename-scenario" type="button">Save</button>
+            </div>
+            <div class="scenario-actions" aria-label="Scenario actions">
+              <button id="new-scenario" type="button">New scenario</button>
+              <button id="duplicate-scenario" type="button" class="icon-button" aria-label="Duplicate scenario" title="Duplicate scenario">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="1"></rect><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"></path></svg>
+              </button>
+              <button id="export-scenario" type="button" class="icon-button" aria-label="Export scenario" title="Export scenario">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"></path><path d="m8 11 4 4 4-4"></path><path d="M5 19h14"></path></svg>
+              </button>
+              <button id="import-scenario-button" type="button" class="icon-button" aria-label="Import scenario" title="Import scenario">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3"></path><path d="m8 7 4-4 4 4"></path><path d="M5 19h14"></path></svg>
+              </button>
+              <input id="import-scenario" class="visually-hidden-input" type="file" accept="application/json,.json" tabindex="-1">
+              <button id="delete-scenario" type="button" class="icon-button danger" aria-label="Delete scenario" title="Delete scenario">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16"></path><path d="M10 11v6M14 11v6"></path><path d="M6 7l1 13h10l1-13"></path><path d="M9 7V4h6v3"></path></svg>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <form id="loan-form" novalidate>
+          <section class="content-section" id="loan" aria-labelledby="loan-heading">
+            <div class="section-heading">
+              <div>
+                <h2 id="loan-heading">Original loan</h2>
+              </div>
+            </div>
+            <div class="input-grid">
+              <div class="field">
+                <label for="principal">Original principal</label>
+                <input id="principal" name="principal" type="number" min="0.01" step="0.01" inputmode="decimal" required>
+              </div>
+              <div class="field">
+                <label for="annual-rate">Annual interest rate</label>
+                <div class="input-suffix"><input id="annual-rate" name="annualRate" type="number" min="0" max="100" step="0.001" inputmode="decimal" required><span aria-hidden="true">%</span></div>
+              </div>
+              <div class="field">
+                <label for="term-years">Original term</label>
+                <div class="input-suffix"><input id="term-years" name="termYears" type="number" min="1" max="50" step="1" inputmode="numeric" required><span aria-hidden="true">years</span></div>
+              </div>
+              <div class="field">
+                <label for="first-payment-month">First payment month</label>
+                <input id="first-payment-month" name="firstPaymentMonth" type="month" required>
+              </div>
+              <div class="field">
+                <label for="statement-balance">Statement balance <span class="optional">optional</span></label>
+                <input id="statement-balance" name="statementBalance" type="number" min="0" step="0.01" inputmode="decimal">
+              </div>
+            </div>
+            <p id="loan-error" class="field-error" role="alert"></p>
+          </section>
+
+          <section class="content-section" id="overpayments" aria-labelledby="recurring-heading">
+            <div class="section-heading">
+              <div>
+                <h2 id="recurring-heading">Recurring extra principal</h2>
+              </div>
+            </div>
+            <div class="recurring-controls">
+              <div class="field">
+                <label for="recurring-extra">Extra principal</label>
+                <input id="recurring-extra" name="recurringExtraAmount" type="number" min="0" step="0.01" inputmode="decimal">
+              </div>
+              <div class="field">
+                <label for="recurring-start">Start</label>
+                <select id="recurring-start" name="recurringExtraStart">
+                  <option value="next">With the next payment</option>
+                  <option value="origin">From the first payment</option>
+                </select>
+              </div>
+            </div>
+          </section>
+        </form>
+
+        <section id="results" hidden>
+          <section class="summary-section" id="overview" aria-labelledby="summary-heading">
+            <div class="section-heading">
+              <div>
+                <h2 id="summary-heading">Overview</h2>
+              </div>
+            </div>
+            <div class="metric-grid">
+              <article class="metric metric-neutral"><p>Monthly payment</p><strong id="metric-payment">—</strong></article>
+              <article class="metric metric-debt"><p>Current balance</p><strong id="metric-current-balance">—</strong><small id="metric-current-balance-detail"></small></article>
+              <article class="metric metric-positive"><p>Planned payoff</p><strong id="metric-payoff">—</strong><small id="metric-time-saved"></small></article>
+              <article class="metric metric-positive"><p>Interest saved</p><strong id="metric-interest-saved">—</strong><small id="metric-interest-detail"></small></article>
+              <article class="metric metric-positive"><p>Extra principal</p><strong id="metric-extra-principal">—</strong><small id="metric-extra-detail"></small></article>
+            </div>
+          </section>
+
+          <section id="reconciliation" class="notice warning" hidden aria-live="polite"></section>
+
+          <section class="content-section" id="balance" aria-labelledby="chart-heading">
+            <div class="section-heading">
+              <div>
+                <h2 id="chart-heading">Balance graph</h2>
+              </div>
+              <div class="chart-legend" aria-label="Chart legend">
+                <span><i class="legend-line baseline" aria-hidden="true"></i>Original</span>
+                <span><i class="legend-line actual" aria-hidden="true"></i>Recorded</span>
+                <span><i class="legend-line projected" aria-hidden="true"></i>Planned</span>
+              </div>
+            </div>
+            <div id="chart-empty" class="empty-state" hidden></div>
+            <div id="chart-wrap" class="chart-wrap" tabindex="0" aria-describedby="chart-description">
+              <svg id="balance-chart" role="img" aria-labelledby="chart-title chart-description" viewBox="0 0 900 360" preserveAspectRatio="xMidYMid meet"></svg>
+            </div>
+            <p id="chart-title" class="sr-only">Mortgage principal balance graph</p>
+            <p id="chart-description" class="sr-only">The chart compares the original payment schedule with recorded and planned payments. Use the payment history for exact values.</p>
+          </section>
+
+          <section class="content-section" id="comparison" aria-labelledby="comparison-heading">
+            <div class="section-heading">
+              <div>
+                <h2 id="comparison-heading">Comparison</h2>
+              </div>
+            </div>
+            <div class="table-wrap" tabindex="0" role="region" aria-label="Mortgage comparison table">
+              <table id="comparison-table">
+                <thead><tr><th scope="col">Measure</th><th scope="col">Original</th><th scope="col">Your plan</th><th scope="col">Change</th></tr></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="content-section" id="annual" aria-labelledby="annual-heading">
+            <div class="section-heading">
+              <div>
+                <h2 id="annual-heading">Annual detail</h2>
+              </div>
+            </div>
+            <div class="table-wrap" tabindex="0" role="region" aria-label="Annual mortgage detail table">
+              <table id="annual-table">
+                <thead><tr><th scope="col">Year</th><th scope="col">Status</th><th scope="col">Beginning</th><th scope="col">P&amp;I</th><th scope="col">Interest</th><th scope="col">Principal</th><th scope="col">Extra</th><th scope="col">Ending</th></tr></thead>
+                <tbody></tbody><tfoot></tfoot>
+              </table>
+            </div>
+          </section>
+
+          <section class="content-section" id="schedule" aria-labelledby="schedule-heading">
+            <div class="section-heading schedule-heading">
+              <div>
+                <h2 id="schedule-heading">Payment history</h2>
+              </div>
+              <button id="toggle-schedule" type="button" aria-expanded="false">Show all months</button>
+            </div>
+            <div class="table-wrap schedule-wrap" tabindex="0" role="region" aria-label="Editable mortgage payment history table">
+              <table id="schedule-table">
+                <thead><tr><th scope="col">Month</th><th scope="col">Status</th><th scope="col">P&amp;I</th><th scope="col">One-time extra</th><th scope="col">Total</th><th scope="col">Interest</th><th scope="col">Principal</th><th scope="col">Ending</th></tr></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="mortgage-calculator.js" defer></script>
+</body>
+</html>
