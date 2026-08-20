@@ -3,6 +3,7 @@ const MortgageCalculator = (() => {
 
   const SCHEMA_VERSION = 1;
   const STORAGE_KEY = 'mortgage-calculator:v1';
+  const THEME_KEY = 'mortgage-calculator:theme';
   const CURRENCY = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
   const MONTH_FORMAT = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' });
   const YEAR_FORMAT = new Intl.DateTimeFormat('en-US', { year: 'numeric', timeZone: 'UTC' });
@@ -1144,6 +1145,53 @@ const MortgageCalculator = (() => {
       showAllSchedule = !showAllSchedule;
       render();
     });
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+    if (typeof window !== 'undefined' && typeof window.matchMedia === 'function') {
+      const media = window.matchMedia('(prefers-color-scheme: dark)');
+      const onSchemeChange = () => { if (!storedTheme()) syncThemeToggle(); };
+      if (media.addEventListener) media.addEventListener('change', onSchemeChange);
+      else if (media.addListener) media.addListener(onSchemeChange);
+    }
+  }
+
+  function prefersDarkTheme() {
+    return typeof window !== 'undefined' && typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+
+  function storedTheme() {
+    try {
+      const value = localStorage.getItem(THEME_KEY);
+      return value === 'dark' || value === 'light' ? value : null;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function effectiveTheme() {
+    return storedTheme() || (prefersDarkTheme() ? 'dark' : 'light');
+  }
+
+  function syncThemeToggle() {
+    const button = document.getElementById('theme-toggle');
+    const label = document.getElementById('theme-toggle-label');
+    if (!button) return;
+    const isDark = effectiveTheme() === 'dark';
+    button.setAttribute('aria-pressed', String(isDark));
+    button.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    if (label) label.textContent = isDark ? 'Light' : 'Dark';
+  }
+
+  function toggleTheme() {
+    const next = effectiveTheme() === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    try {
+      localStorage.setItem(THEME_KEY, next);
+    } catch (_) {
+      setStatus('Theme preference could not be saved in this browser.');
+    }
+    syncThemeToggle();
   }
 
   function init() {
@@ -1176,6 +1224,7 @@ const MortgageCalculator = (() => {
       notice.textContent = shared.error;
     }
     bindEvents();
+    syncThemeToggle();
     render();
     if (storageAvailable && !storageWriteBlocked) saveNow();
   }

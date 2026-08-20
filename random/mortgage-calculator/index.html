@@ -4,12 +4,23 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mortgage Payoff Calculator</title>
+  <script>
+    try {
+      var storedTheme = localStorage.getItem('mortgage-calculator:theme');
+      if (storedTheme === 'dark' || storedTheme === 'light') document.documentElement.dataset.theme = storedTheme;
+    } catch (e) {}
+  </script>
   <link rel="stylesheet" href="mortgage-calculator.css">
 </head>
 <body>
   <div class="mortgage-calculator" data-calculator-root>
     <header class="calculator-intro" id="top">
       <h1>Mortgage Calculator</h1>
+      <button id="theme-toggle" type="button" class="theme-toggle" aria-pressed="false">
+        <svg class="theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
+        <svg class="theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+        <span id="theme-toggle-label" class="theme-toggle-label">Dark</span>
+      </button>
     </header>
 
     <div class="calculator-layout">
